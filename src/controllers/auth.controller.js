@@ -1,13 +1,11 @@
+import authService from "../services/auth.service.js";
+
 class AuthController {
-  signup(req, res, next) {
+  async signup(req, res, next) {
     try {
       console.log(`[P]:::signup:::`, req.body);
-
-      
-      return res.status(200).json({
-        code: "2001",
-        metadata: { userid: 1 },
-      });
+      const result = await authService.signup(req.body);
+      return res.status(200).json(result);
     } catch (error) {
       next(error);
     }

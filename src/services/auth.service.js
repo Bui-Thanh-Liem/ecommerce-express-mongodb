@@ -1,7 +1,8 @@
+import * as bcrypt from "bcrypt";
 import * as crypto from "node:crypto";
-import shopModel from "../models/shop.model";
-import keyTokenService from "./keyToken.service";
-import { createTokenPair } from "../auth/authUtil";
+import shopModel from "../models/shop.model.js";
+import keyTokenService from "./keyToken.service.js";
+import { createTokenPair } from "../auth/authUtil.js";
 
 const ROLES = {
   SHOP: "SHOP",
@@ -15,7 +16,7 @@ class AuthService {
     try {
       // 1. check email exists
       const holderShop = await shopModel.findOne({ email }).lean();
-      if (!holderShop)
+      if (holderShop)
         return {
           code: "xxx",
           message: "Shop already registered!",
@@ -23,7 +24,7 @@ class AuthService {
         };
 
       // 2. hash password
-      const passwordHash = crypto.hash(password, 10);
+      const passwordHash = await bcrypt.hash(password, 10);
 
       // 3. insert
       const newShop = await shopModel.create({
@@ -34,10 +35,10 @@ class AuthService {
       });
 
       // 4. create key store
-      if (!newShop) {
+      if (newShop) {
         // create privateKey, publicKey to sign jwt
         const { privateKey, publicKey } = crypto.generateKeyPairSync("rsa", {
-          modulesLength: 4096,
+          modulusLength: 4096,
         });
 
         console.log({ privateKey, publicKey }); // save collections keyToken
@@ -61,9 +62,11 @@ class AuthService {
           privateKey,
         });
 
-        return {code: "xxx", metadata: }
+        return { code: "xxx", metadata: { user: newShop, tokens } };
       }
     } catch (error) {
+      console.log("error:::", error);
+
       return {
         code: "xxx",
         message: error.message,
