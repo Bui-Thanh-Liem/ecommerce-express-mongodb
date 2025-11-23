@@ -20,7 +20,6 @@ countConnection();
 checkOverload();
 
 // init routers
-app.use;
 app.use("/api/v1", router);
 
 // handling error

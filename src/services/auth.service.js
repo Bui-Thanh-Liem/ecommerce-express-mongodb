@@ -1,8 +1,9 @@
 import * as bcrypt from "bcrypt";
 import * as crypto from "node:crypto";
-import shopModel from "../models/shop.model.js";
-import keyTokenService from "./keyToken.service.js";
 import { createTokenPair } from "../auth/authUtil.js";
+import shopModel from "../models/shop.model.js";
+import { getInfoData } from "../utils/index.js";
+import keyTokenService from "./keyToken.service.js";
 
 const ROLES = {
   SHOP: "SHOP",
@@ -37,9 +38,15 @@ class AuthService {
         // create privateKey, publicKey to sign jwt
         const { privateKey, publicKey } = crypto.generateKeyPairSync("rsa", {
           modulusLength: 4096,
+          publicKeyEncoding: {
+            type: "spki",
+            format: "pem",
+          },
+          privateKeyEncoding: {
+            type: "pkcs8",
+            format: "pem",
+          },
         });
-
-        console.log({ privateKey, publicKey }); // save collections keyToken
 
         const publicKeyString = await keyTokenService.create({
           userid: newShop._id,
@@ -54,13 +61,23 @@ class AuthService {
           };
         }
 
-        const tokens = createTokenPair({
+        // Create token pair
+        const tokens = await createTokenPair({
           payload: { userId: newShop._id },
           publicKey,
           privateKey,
         });
 
-        return { code: "xxx", metadata: { user: newShop, tokens } };
+        return {
+          code: "xxx",
+          metadata: {
+            shop: getInfoData({
+              obj: newShop,
+              fields: ["_id", "email", "roles"],
+            }),
+            tokens,
+          },
+        };
       }
     } catch (error) {
       console.log("error:::", error);
