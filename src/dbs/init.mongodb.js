@@ -16,7 +16,7 @@ class Database {
         maxPoolSize: 50,
       })
       .then(() => console.log("Connected mongodb"))
-      .catch((err) => console.log("Error Connect"));
+      .catch((err) => console.log("Error Connect:::", err));
 
     if (process.env.NODE_ENV === "development") {
       mongoose.set("debug", true);

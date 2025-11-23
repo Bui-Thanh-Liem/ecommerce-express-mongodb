@@ -64,7 +64,7 @@ class AuthService {
         // Create token pair
         const tokens = await createTokenPair({
           payload: { userId: newShop._id },
-          publicKey,
+          publicKey: publicKeyString,
           privateKey,
         });
 
