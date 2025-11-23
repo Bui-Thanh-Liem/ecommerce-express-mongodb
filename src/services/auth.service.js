@@ -7,8 +7,6 @@ import { createTokenPair } from "../auth/authUtil.js";
 const ROLES = {
   SHOP: "SHOP",
   WRITE: "WRITE",
-  SHOP: "SHOP",
-  SHOP: "SHOP",
 };
 
 class AuthService {
@@ -31,7 +29,7 @@ class AuthService {
         name,
         email,
         password: passwordHash,
-        roles: [],
+        roles: [ROLES.WRITE],
       });
 
       // 4. create key store
