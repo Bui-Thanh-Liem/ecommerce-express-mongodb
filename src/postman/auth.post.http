@@ -1,11 +1,29 @@
 @url_dev=http://localhost:9000/api/v1
+@access_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTI0N2EyMWNmYmEyZjc5YTk0YWY4NGMiLCJpYXQiOjE3NjQwMDEyNTYsImV4cCI6MTc2NDE3NDA1Nn0.MjmjnuC6Kdj8eI3jiemGO-lLjEoCOVF2YbNMUgpULEzX0JHxgSRT7gkcQcLP2ofHas0QGEoUlVgQ1bVj27LWQ7BmlkkaYwjxuw_VFrm2kc2Ap0U5HQZk1Vum9du4ZqBOAqeRk2wIO9x9L2h9jKXmbgDQRgALge1bjS8MdWeCrG4tcOkUICG0px6V-3jZMKSUY3iUr_ctnZoS8KFIJ6luE9fpirPLKjuqK8Q0KSEHXXiEcYSl9iTRwedmCvz5wvAfziLYTzFXWKUf7cwoamz_7e1LMIL9mTmQdRJOOuhzwOTyrobyPB49e50QGPx5-r-qtjXCNoxSMmSo0hH2220IJoxgmkIeTIkvsftq1hLjaC89EXjekVzw0RvM1XjD7URk--htTzc3bPHw0RrtaKo52AnTa0EfOltyQnmVhbvdaaVgYOnJVvvsEWOc0GSvg7Cj-bxS1Udys0iscuGggEB9c0-um602nlcO8sdJxRUKAESMC_4yyeuisUVrwytxE2tTpIkEaVZlYVfMTvPSM8UmwRUFP3pskJ5Kg636q6KWzQkqjyN1O_sT0M7gXQy8874l3IxqY_tmxlVkYTiMzfKC0q5aGSFGXj5H8Wk_Tb1vuDc_unmbLT_CUP4hTAlErR0PyzS9yGN2Q563RXIwTNuC7C5_SBYoXtwhLnfmF3yt61I
 
 ### signup
-POST {{url_dev}}/shop/signupd
+POST {{url_dev}}/shop/signup
 Content-Type: application/json
-x-api-key: 1f962bb62786a6ed8ed01a797d71d28a50561c379c3ae10e5db16cfb7dcd65fe
+x-api-key: f2e3e12c36e04b7a70d0d41102e3b5cb885f113dccb4ea2558c6618cd81b04ff
 
 {
     "email": "buithanhliem@gmail.com",
     "password": "liemdev@123"
 }
+
+### login
+POST {{url_dev}}/shop/login
+Content-Type: application/json
+x-api-key: f2e3e12c36e04b7a70d0d41102e3b5cb885f113dccb4ea2558c6618cd81b04ff
+
+{
+    "email": "buithanhliem@gmail.com",
+    "password": "liemdev@123"
+}
+
+### logout
+POST {{url_dev}}/shop/logout
+Content-Type: application/json
+x-api-key: f2e3e12c36e04b7a70d0d41102e3b5cb885f113dccb4ea2558c6618cd81b04ff
+x-client-key: 69247a21cfba2f79a94af84c
+Authorization: Bearer {{access_token}}
