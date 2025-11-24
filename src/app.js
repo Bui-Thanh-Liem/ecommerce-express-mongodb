@@ -22,6 +22,24 @@ checkOverload();
 // init routers
 app.use("/api/v1", router);
 
+// not found
+app.use((req, res, next) => {
+  const err = new Error("Not Found!");
+  err.status = 404;
+  next(err);
+});
+
 // handling error
+app.use((err, req, res, next) => {
+  const status = err.statusCode || 500;
+  console.log("handling error:::", err);
+
+  const message = err.message || "Internal Server Error";
+  return res.status(status).json({
+    status: "error",
+    code: status,
+    message,
+  });
+});
 
 export default app;

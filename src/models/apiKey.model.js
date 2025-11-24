@@ -16,7 +16,7 @@ var apiKeySchema = new Schema(
       type: Boolean,
       default: true,
     },
-    permission: {
+    permissions: {
       type: [String],
       require: true,
       default: ["0000", "0001", "0002"],

@@ -1,6 +1,10 @@
 import * as bcrypt from "bcrypt";
 import * as crypto from "node:crypto";
 import { createTokenPair } from "../auth/authUtil.js";
+import {
+  BadRequestError,
+  ConflictRequestError,
+} from "../core/error.response.js";
 import shopModel from "../models/shop.model.js";
 import { getInfoData } from "../utils/index.js";
 import keyTokenService from "./keyToken.service.js";
@@ -11,81 +15,61 @@ const ROLES = {
 };
 
 class AuthService {
-  async signup({ name, email, password }) {
-    try {
-      // 1. check email exists
-      const holderShop = await shopModel.findOne({ email }).lean();
-      if (holderShop)
-        return {
-          code: "xxx",
-          message: "Shop already registered!",
-          status: "error",
-        };
+  async signup({ email, password }) {
+    // 1. check email exists
+    const holderShop = await shopModel.findOne({ email }).lean();
+    if (holderShop) throw new ConflictRequestError("Shop already registered!");
 
-      // 2. hash password
-      const passwordHash = await bcrypt.hash(password, 10);
+    // 2. hash password
+    const passwordHash = await bcrypt.hash(password, 10);
 
-      // 3. insert
-      const newShop = await shopModel.create({
-        name,
-        email,
-        password: passwordHash,
-        roles: [ROLES.WRITE],
+    // 3. insert
+    const newShop = await shopModel.create({
+      email,
+      password: passwordHash,
+      roles: [ROLES.WRITE],
+    });
+
+    // 4. create key store
+    if (newShop) {
+      // create privateKey, publicKey to sign jwt
+      const { privateKey, publicKey } = crypto.generateKeyPairSync("rsa", {
+        modulusLength: 4096,
+        publicKeyEncoding: {
+          type: "spki",
+          format: "pem",
+        },
+        privateKeyEncoding: {
+          type: "pkcs8",
+          format: "pem",
+        },
       });
 
-      // 4. create key store
-      if (newShop) {
-        // create privateKey, publicKey to sign jwt
-        const { privateKey, publicKey } = crypto.generateKeyPairSync("rsa", {
-          modulusLength: 4096,
-          publicKeyEncoding: {
-            type: "spki",
-            format: "pem",
-          },
-          privateKeyEncoding: {
-            type: "pkcs8",
-            format: "pem",
-          },
-        });
+      const publicKeyString = await keyTokenService.create({
+        userid: newShop._id,
+        publicKey,
+      });
 
-        const publicKeyString = await keyTokenService.create({
-          userid: newShop._id,
-          publicKey,
-        });
-
-        if (!publicKeyString) {
-          return {
-            code: "xxx",
-            message: "publicKeyString error",
-            status: "error",
-          };
-        }
-
-        // Create token pair
-        const tokens = await createTokenPair({
-          payload: { userId: newShop._id },
-          publicKey: publicKeyString,
-          privateKey,
-        });
-
-        return {
-          code: "xxx",
-          metadata: {
-            shop: getInfoData({
-              obj: newShop,
-              fields: ["_id", "email", "roles"],
-            }),
-            tokens,
-          },
-        };
+      if (!publicKeyString) {
+        throw new BadRequestError("publicKeyString error");
       }
-    } catch (error) {
-      console.log("error:::", error);
+
+      // Create token pair
+      const tokens = await createTokenPair({
+        payload: { userId: newShop._id },
+        publicKey: publicKeyString,
+        privateKey,
+      });
 
       return {
         code: "xxx",
-        message: error.message,
-        status: "error",
+        metadata: {
+          shop: getInfoData({
+            obj: newShop,
+            fields: ["_id", "email", "roles"],
+          }),
+          tokens,
+        },
       };
     }
   }

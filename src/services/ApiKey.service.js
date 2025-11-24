@@ -1,18 +1,28 @@
-import apiKeyModel from "../models/apiKey.model";
+import * as crypto from "crypto";
+import apiKeyModel from "../models/apiKey.model.js";
 
 class ApiKeyService {
-  async create({ key }) {
+  async create() {
     try {
-      const publicKeyString = publicKey.toString();
+      // Random key
+      const randomKey = crypto.randomBytes(32).toString("hex");
 
-      const tokens = await apiKeyModel.create({
-        key,
+      // Save key
+      const newObjKey = await apiKeyModel.create({
+        key: randomKey,
+        permissions: ["0000"],
       });
 
-      return tokens ? publicKeyString : null;
+      return newObjKey ? newObjKey : null;
     } catch (error) {
       return error;
     }
+  }
+
+  async findOneByKey({ key }) {
+    // await this.create()
+    const objKey = await apiKeyModel.findOne({ key, status: true }).lean();
+    return objKey;
   }
 }
 
