@@ -18,6 +18,14 @@ class AuthController {
     }).send(res);
   }
 
+  async refreshToken(req, res, next) {
+    const result = await authService.refreshToken(req.body);
+    new OkResponse({
+      message: "Token refreshed successfully",
+      metadata: result,
+    }).send(res);
+  }
+
   async logout(req, res, next) {
     const result = await authService.logout({ keyStore: req.keyStore });
     new OkResponse({

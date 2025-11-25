@@ -31,14 +31,20 @@ app.use((req, res, next) => {
 
 // handling error
 app.use((err, req, res, next) => {
-  const status = err.statusCode || 500;
-  console.log("handling error:::", err);
+  //
+  const isDev = process.env.NODE_ENV === "development";
 
+  //
+  const stack = err.stack || "";
+  const status = err.statusCode || 500;
   const message = err.message || "Internal Server Error";
+
+  //
   return res.status(status).json({
-    status: "error",
-    code: status,
     message,
+    code: status,
+    status: "error",
+    stack: isDev ? stack : undefined,
   });
 });
 

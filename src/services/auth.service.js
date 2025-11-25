@@ -1,14 +1,17 @@
 import * as bcrypt from "bcrypt";
+import JWT from "jsonwebtoken";
 import * as crypto from "node:crypto";
 import { createTokenPair } from "../auth/authUtil.js";
 import {
   BadRequestError,
   ConflictRequestError,
+  ForbiddenRequestError,
 } from "../core/error.response.js";
 import shopModel from "../models/shop.model.js";
 import { getInfoData } from "../utils/index.js";
 import keyTokenService from "./keyToken.service.js";
-import shopService from "./shop.service.js";
+import ShopService from "./shop.service.js";
+import { log } from "node:console";
 
 const ROLES = {
   SHOP: "SHOP",
@@ -55,6 +58,7 @@ class AuthService {
       // Save publicKey to keystore
       const publicKeyString = await keyTokenService.create({
         publicKey,
+        privateKey,
         userid: newShop._id,
         refreshToken: tokens.refreshToken,
       });
@@ -75,7 +79,7 @@ class AuthService {
 
   async login({ email, password }) {
     // 1. check email exists
-    const foundShop = await shopService.findOneByEmail({ email });
+    const foundShop = await ShopService.findOneByEmail({ email });
     if (!foundShop) throw new BadRequestError("Shop not registered!");
 
     // 2. check password
@@ -103,6 +107,7 @@ class AuthService {
 
     const publicKeyString = await keyTokenService.create({
       publicKey,
+      privateKey,
       userid: foundShop._id,
       refreshToken: tokens.refreshToken,
     });
@@ -120,8 +125,59 @@ class AuthService {
     };
   }
 
+  async refreshToken({ refreshToken }) {
+    // 1. check refreshToken used
+    const foundTokenUsed = await keyTokenService.findByRefreshTokenUsed(
+      refreshToken
+    );
+    if (foundTokenUsed) {
+      //
+      const decodeUser = JWT.verify(refreshToken, foundTokenUsed.publicKey);
+      console.log({ userId: decodeUser.userId }); // Đưa vào danh sách bất thường (tại sao lại lấy refreshToken đã dùng)
+
+      //
+      await keyTokenService.removeByUserId(decodeUser.userId);
+
+      //
+      throw new ForbiddenRequestError(
+        "Something wrong happen. Please login again."
+      );
+    }
+
+    // 2. check refreshToken valid
+    const holderToken = await keyTokenService.findByRefreshToken(refreshToken);
+    if (!holderToken) {
+      throw new ForbiddenRequestError("Shop not registered!");
+    }
+
+    // 3. verify refreshToken
+    const decodeUser = JWT.verify(refreshToken, holderToken.publicKey);
+    const foundShop = await ShopService.findOneById({ id: decodeUser.userId });
+    if (!foundShop) {
+      throw new ForbiddenRequestError("Shop not registered!");
+    }
+
+    // 4. create new token pair
+    const tokens = await createTokenPair({
+      payload: { userId: foundShop._id },
+      privateKey: holderToken.privateKey,
+    });
+
+    // 5. update refreshToken in key store
+    await keyTokenService.updateRefreshTokenUsed({
+      userId: foundShop._id,
+      refreshTokenUsed: refreshToken, // add to list used
+      refreshToken: tokens.refreshToken, // replace with new one
+    });
+
+    return {
+      shop: getInfoData({ fields: ["_id", "email", "roles"], obj: foundShop }),
+      tokens,
+    };
+  }
+
   async logout({ keyStore }) {
-    return await keyTokenService.remove({ keyStore });
+    return await keyTokenService.removeById({ keyStore });
   }
 }
 
