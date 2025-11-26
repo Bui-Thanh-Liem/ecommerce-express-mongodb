@@ -15,7 +15,7 @@ const router = express.Router();
 router.get("/search/:q", asyncHandler(ProductController.searchProductsByUser));
 
 /**
- * @desc Get all published product for users
+ * @desc Get product by user
  * @route GET /:id
  */
 router.get("/:id", asyncHandler(ProductController.findProductForUser));
@@ -28,7 +28,7 @@ router.get("/:id", asyncHandler(ProductController.findProductForUser));
  */
 router.get("/", asyncHandler(ProductController.findAllProductsForUser));
 
-// Protected routes
+// =================== Protected routes ===================
 router.use(authentication);
 
 /**
@@ -43,6 +43,19 @@ router.use(authentication);
  * @body {object} attributes - specific attributes based on product type
  */
 router.post("/", asyncHandler(ProductController.create));
+
+/**
+ * @desc Update a product
+ * @route PATCH /:id
+ * @body {string} name
+ * @body {string} thumb
+ * @body {string} desc
+ * @body {number} price
+ * @body {number} quantity
+ * @body {string} type - Clothing | Electronic | Furniture
+ * @body {object} attributes - specific attributes based on product type
+ */
+router.patch("/:id", asyncHandler(ProductController.update));
 
 /**
  * @desc Publish product for shop

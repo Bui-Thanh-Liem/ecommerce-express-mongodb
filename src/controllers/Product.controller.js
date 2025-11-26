@@ -3,12 +3,7 @@ import ProductFactory from "../services/Product.service.js";
 
 class ProductController {
   async create(req, res, next) {
-    console.log({
-      type: req.body.type,
-      payload: req.body,
-    });
-
-    const result = await ProductFactory.createProduct({
+    const newProduct = await ProductFactory.createProduct({
       type: req.body.type,
       payload: {
         ...req.body,
@@ -18,7 +13,23 @@ class ProductController {
 
     new CreatedResponse({
       message: "Product created successfully",
-      metadata: result,
+      metadata: newProduct,
+    }).send(res);
+  }
+
+  async update(req, res, next) {
+    const updated = await ProductFactory.updateProduct({
+      id: req.params.id,
+      type: req.body.type,
+      payload: {
+        ...req.body,
+        shop: req.keyStore.user,
+      },
+    });
+
+    new OkResponse({
+      message: "Product updated successfully",
+      metadata: updated,
     }).send(res);
   }
 

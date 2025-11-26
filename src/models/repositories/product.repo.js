@@ -1,8 +1,25 @@
 import { Types } from "mongoose";
 import { ProductModel } from "../product.model.js";
-import { getSelectData, getUnSelectData } from "../../utils/index.js";
+import {
+  getSelectData,
+  getUnSelectData,
+  removeFalsyObj,
+  updateNestedObjParser,
+} from "../../utils/index.js";
 
 class ProductRepository {
+  //
+  static async findOneAndUpdate({ id, payload, model, isNew = true }) {
+    //
+    const nested = updateNestedObjParser(removeFalsyObj(payload));
+    console.log("removeFalsyObj(payload):::", removeFalsyObj(payload));
+    console.log("findOneAndUpdate:::", nested);
+
+    return await model.findByIdAndUpdate(id, nested, {
+      new: isNew,
+    });
+  }
+
   //
   static async findAllDraftForShop({ query, limit, skip }) {
     return await this.queryProducts({ query, limit, skip });
@@ -70,6 +87,7 @@ class ProductRepository {
     return await foundProduct.save();
   }
 
+  //
   static async findAllProductsForUser({ page, limit, sort, filters, select }) {
     const skip = (page - 1) * limit;
     const sortBy = sort === "ctime" ? { createdAt: -1 } : { updatedAt: -1 };
@@ -84,6 +102,7 @@ class ProductRepository {
       .exec();
   }
 
+  //
   static async findProductForUser({ id, unSelect }) {
     return await ProductModel.findOne({ _id: id, isPublished: true })
       .select(getUnSelectData(unSelect))

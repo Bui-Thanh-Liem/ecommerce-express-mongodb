@@ -5,6 +5,7 @@ import {
   FurnitureModel,
   ProductModel,
 } from "../models/product.model.js";
+import { InventoryRepository } from "../models/repositories/inventory.repo.js";
 import ProductRepository from "../models/repositories/product.repo.js";
 
 // Registry mapping type → model con
@@ -30,7 +31,7 @@ class Product {
       quantity: this.quantity,
       type: this.type,
       shop: this.shop,
-      attributes: productSpecificId, // reference đến document con
+      attributes: this.attributes, // reference đến document con
     };
 
     const newProduct = await ProductModel.create(productData);
@@ -62,37 +63,45 @@ class ProductService {
     const product = new Product(payload);
     const newProduct = await product.createProduct(newSpecificProduct._id);
 
-    // Gán thêm thông tin con nếu muốn trả về full data
-    newProduct.attributes = newSpecificProduct;
+    // Sau khi tạo thành công thì cập nhật inventory
+    if (newProduct) {
+      await InventoryRepository.create({
+        shop: payload.shop,
+        location: "Viet Nam",
+        product: newProduct._id,
+        stock: newProduct.quantity,
+      });
+    }
 
     return newProduct;
   }
 
-  static async updateProduct({ type, payload }) {
-    const productModel = ProductTypeModel[type];
+  static async updateProduct({ type, id, payload }) {
+    // Nếu có attributes thì cập nhật trong cub-class nữa
+    if (payload?.attributes) {
+      const subProductModel = ProductTypeModel[type];
 
-    if (!productModel) {
-      throw new BadRequestError(`Invalid product type: ${type}`);
+      if (!subProductModel) {
+        throw new BadRequestError(`Invalid product type: ${type}`);
+      }
+
+      await ProductRepository.findOneAndUpdate({
+        id,
+        model: subProductModel,
+        payload: payload.attributes,
+      });
     }
 
-    // Tạo document con trước (Clothing/Electronic/Furniture)
-    const newSpecificProduct = await productModel.create({
-      ...payload.attributes,
-      shop: payload.shop,
+    // Nếu có quantity thì cập nhật inventory
+    if (payload?.quantity) {
+    }
+
+    // Cập nhật Product bình thường
+    return await ProductRepository.findOneAndUpdate({
+      id,
+      model: ProductModel,
+      payload: payload,
     });
-
-    if (!newSpecificProduct) {
-      throw new BadRequestError(`Create ${type.toLowerCase()} failed`);
-    }
-
-    // Tạo document Product chính, truyền _id của document con làm reference
-    const product = new Product(payload);
-    const newProduct = await product.createProduct(newSpecificProduct._id);
-
-    // Gán thêm thông tin con nếu muốn trả về full data
-    newProduct.attributes = newSpecificProduct;
-
-    return newProduct;
   }
 
   static async findAllDraftForShop({ shopId, limit = 50, skip = 0 }) {
