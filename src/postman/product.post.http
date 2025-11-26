@@ -1,0 +1,84 @@
+@url_dev=http://localhost:9000/api/v1
+@access_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTIzYmFjY2IxMmMwMWYxZjQ5ZWU5NTUiLCJpYXQiOjE3NjQxMjU4MzYsImV4cCI6MTc2NDI5ODYzNn0.uGx2mzpPdSENRQPPOKiqYhgM0Qg_zvRwqnsBn-d2rinJS1q6g4NVemhnljXdjWNOfr8KY0xOFaJump-SF4k23XFyDfWo79hk5UG8vB7oN2jVXk0RaAN23s47qgh8J5w5olGQCObHsQMyJQftygRMuioR1Zk3AxHFAHH5d17DaqcnoHiVHo0egsM0i0LkywWZgQqdlS7LiL_NQYGQwUSNS-CPmZGFRFRbSW17Oj4WcXFhnHrZj8ZQGtxr_UknbfvRxNbF828oR3reEOHPL3hF7H4oc2TzIQBM_zVYsF7n5az6BsBdiZO-9kSl-Y9R6kutAZnElHVNnmi_ZoVwjGTJ_dONEUnOOIomW1vwh-q53TXQIdB05tA4g6Ulzj-NqfDeg11jPyHztIg7rbPqhb0nDSARwqnkCUuy5YjFPScZ1pJoIxHH-NptL1wBEnNRUwwsUJdu-s38XlBCZvJrR2Mcz_x7U2P1q7yQwvhT9hoCLd4UF1oicbSM8wEuzo7jyVmTT6sAkEGrhl6agun8ymcoMtaX7JNYV0FNYJKbXVZe-TZOmu0RrgkZSU_38kxyN1AQd5_GEeIHUU1RohmTsLDpNpzMOO6fWhpqG7YMqscaVjVZN_MnBv-0pqxnMuyb_LQqJ0dGqJmDJcMiCFakpzTdutPj_SObA8ON9V3nJUyookY
+@refresh_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTIzYmFjY2IxMmMwMWYxZjQ5ZWU5NTUiLCJpYXQiOjE3NjQxMjU4MzYsImV4cCI6MTc2NDczMDYzNn0.YC0uvMyWtd2BOoEffGgNPuLa60cj7jt8ST_Hn-w0mjsNGqHDcy-FW1o05EBEK5ljG7X-uNOp59IhD1k5ljNisSeQAAwBu1pNy9-nE1jYxfj05jJlBNkiSobCXvRmnkOpTkqvR76gQbqGSd8Q8iK2GMAsqgL29XNNLZCCUNtXuTalF9RAB6DoLNfn0D1W0m5zSgJakqQHiMHssEtjG--n-ds52dGkCv1vcfzAXEfaMwZaNdABdVO0UpgoX7KVVG-Y7GSgZS1ASgDQh84PzWBsJTg5S26F2jRriV9pJVGlE7g7r8-yrPSx66Y3dNrgIY9rKzL2Xyc3OxnyjogL4Am97hBlLFOz83e9NLPdXgFJNhdmLEB_7KzwzZn3EQAGd51JfjKMSvmVCNiW-51fSioxHo_qnenwumsiNKQNyx9S59yunP4bWJZi-vQK0djmh1LtB7W9rmmjy8-UDNwdvjpdZEWFCNFST3mPRIiJQJilnu9Qozuvq2At3FIvUZ8sg31ZlR6QE5C2MTn9ZuGYxd0B7De0QZbQ1AWnlQFT-PJfU2i9-V1b4ulYmlU7ALWlepBQSwz8vjsWSteQVcAsb_e5tfEEv9D0VdTWRC2TvwhghT6xVvQaidhCZcr6E4EHY0pEYM5XAGGzaEe1LPnPiVBCxIycRi-k47UqbembS1oU2ng
+
+### cerate product
+POST {{url_dev}}/product/
+Content-Type: application/json
+x-api-key: 1f962bb62786a6ed8ed01a797d71d28a50561c379c3ae10e5db16cfb7dcd65fe
+x-client-key: 6923baccb12c01f1f49ee955
+Authorization: Bearer {{access_token}}
+
+{
+    "name": "Ghế sofa hiện đại",
+    "thumb": "https://example.com/images/sofa.jpg",
+    "desc": "Ghế sofa hiện đại với thiết kế sang trọng và thoải mái.",
+    "price": 500,
+    "quantity": 100,
+    "type": "Furniture",
+    "attributes": {
+        "material": "Leather",
+        "dimensions": "200x90x100 cm",
+        "weight": 30
+    }
+}
+
+### update product
+PATCH {{url_dev}}/product/6923baccb12c01f1f49ee955
+Content-Type: application/json
+x-api-key: 1f962bb62786a6ed8ed01a797d71d28a50561c379c3ae10e5db16cfb7dcd65fe
+x-client-key: 6923baccb12c01f1f49ee955
+Authorization: Bearer {{access_token}}
+
+{
+    "name": "Ghế sofa hiện đại mới"
+}
+
+### publish product by id
+POST {{url_dev}}/product/publish/69267d2e7f1bcabccd8504a7
+Content-Type: application/json
+x-api-key: 1f962bb62786a6ed8ed01a797d71d28a50561c379c3ae10e5db16cfb7dcd65fe
+x-client-key: 6923baccb12c01f1f49ee955
+Authorization: Bearer {{access_token}}
+
+### unPublish product by id
+POST {{url_dev}}/product/unpublish/6926a6013ad38d006b2287ce
+Content-Type: application/json
+x-api-key: 1f962bb62786a6ed8ed01a797d71d28a50561c379c3ae10e5db16cfb7dcd65fe
+x-client-key: 6923baccb12c01f1f49ee955
+Authorization: Bearer {{access_token}}
+
+### find all draft products for shop
+GET {{url_dev}}/product/drafts/all?limit=50&skip=0
+Content-Type: application/json
+x-api-key: 1f962bb62786a6ed8ed01a797d71d28a50561c379c3ae10e5db16cfb7dcd65fe
+x-client-key: 6923baccb12c01f1f49ee955
+Authorization: Bearer {{access_token}}
+
+### find all published products for shop
+GET {{url_dev}}/product/published/all?limit=50&skip=0
+Content-Type: application/json
+x-api-key: 1f962bb62786a6ed8ed01a797d71d28a50561c379c3ae10e5db16cfb7dcd65fe
+x-client-key: 6923baccb12c01f1f49ee955
+Authorization: Bearer {{access_token}}
+
+### search products by user
+GET {{url_dev}}/product/search/sofa
+Content-Type: application/json
+x-api-key: 1f962bb62786a6ed8ed01a797d71d28a50561c379c3ae10e5db16cfb7dcd65fe
+x-client-key: 6923baccb12c01f1f49ee955
+Authorization: Bearer {{access_token}}
+
+### find all products for user
+GET {{url_dev}}/product/
+Content-Type: application/json
+x-api-key: 1f962bb62786a6ed8ed01a797d71d28a50561c379c3ae10e5db16cfb7dcd65fe
+x-client-key: 6923baccb12c01f1f49ee955
+Authorization: Bearer {{access_token}}
+
+### find product for user
+GET {{url_dev}}/product/6926a6013ad38d006b2287ce
+Content-Type: application/json
+x-api-key: 1f962bb62786a6ed8ed01a797d71d28a50561c379c3ae10e5db16cfb7dcd65fe
+x-client-key: 6923baccb12c01f1f49ee955
+Authorization: Bearer {{access_token}}

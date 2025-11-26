@@ -24,9 +24,10 @@ app.use("/api/v1", router);
 
 // not found
 app.use((req, res, next) => {
-  const err = new Error("Not Found!");
-  err.status = 404;
-  next(err);
+  return res.status(404).json({
+    code: 404,
+    message: "Not Found!",
+  });
 });
 
 // handling error

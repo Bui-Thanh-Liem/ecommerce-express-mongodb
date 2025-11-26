@@ -9,9 +9,8 @@ import {
 } from "../core/error.response.js";
 import shopModel from "../models/shop.model.js";
 import { getInfoData } from "../utils/index.js";
-import keyTokenService from "./keyToken.service.js";
-import ShopService from "./shop.service.js";
-import { log } from "node:console";
+import keyTokenService from "./KeyToken.service.js";
+import ShopService from "./Shop.service.js";
 
 const ROLES = {
   SHOP: "SHOP",

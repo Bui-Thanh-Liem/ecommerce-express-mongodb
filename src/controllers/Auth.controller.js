@@ -1,5 +1,5 @@
 import { CreatedResponse, OkResponse } from "../core/success.response.js";
-import authService from "../services/auth.service.js";
+import authService from "../services/Auth.service.js";
 
 class AuthController {
   async signup(req, res, next) {
