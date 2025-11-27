@@ -1,34 +1,51 @@
 @url_dev=http://localhost:9000/api/v1
-@access_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTI4MGJiMzk1ZDBmODA1ODExN2NhODIiLCJpYXQiOjE3NjQyMzIxMzIsImV4cCI6MTc2NDQwNDkzMn0.75rh6uNBXw713mPSQiC11Kz49PkhiO5HLg0k7I3j8d84bnYmitLoSPB3_6ALIE4q2XlTjXon0jyKNmpZgJWcB2XPfcqf_ujVb5ZZnPoiulb2dBiQU7-uR3wT_t78nfHK7irO7nWMvL4p691FC-Rd1UPIoPhfpZPa9hcJKi5czrB0V42DM3O3ole7SHPxrX8vYuMN9Iz-P4_HhvxpCV9jrc7BfC4o49_6DVJ7wN6HRFQILz7rOdEvwVhB71hC_a9oBHKjw6b8a9Qbx7QlaXrqoW9imIHbeF0S8G8OtruZEQBbrcL2ytu7mT3veXKp-gMZHl6yR0oQ4OLeonGX8MFQib4zuTOuvVY5yHPLuKxJz5RC6Ivw-CCJZZAX7iAmuW5anGaaUIsAvsmAlacL5g0wy2RABSEdQYmSMpXFOV48iwmue0LBzKd0soJ6cs1m7TJ6BPuR8mQfyHce4-MLpesUZkPL-emLMsdOMR0A6ifqQJNFBQVdBM4q2HPLA_UYobcXDmktnDOwA1L2-XjPOASLTzRZ8aTIbW0X6huSpJ94bjPqwEZzz7Z6h7y5InAMYxuxB994qCJbEEq0fEIdT5bapu00fe8UvySu7r9SOnw3p3FQXNhjeklOnhFoZTeQsHaW9Sw2lYq-YBid07lsNdIsw2dPAVuo6eAJRfGZWw9fBNo
-@refresh_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTI4MGJiMzk1ZDBmODA1ODExN2NhODIiLCJpYXQiOjE3NjQyMzIxMzIsImV4cCI6MTc2NDgzNjkzMn0.EX3YJMjShcvD7zeztAz0Sm3pxAWcU6m9Y2ZO6k17fBIHeiginyWQESknaebwwq4alN0vSwAbrS00ahYbXtdTa1uMQyCsWQ3mH2xx5Rc8Z_Y6aFky8chZIG9Q5vLut3WRShuYx6E80TogYE2GYhEWlsONPNrm10eodYuOXQ6szOd48R4dbU0tOEKjas9XtU-LCoJDWzNHqW_gvzgzFhy7F0cD3turO2EER2T8sR7dTmo3RNodItrH2kfqQnZVrIwHor9RoUKGetq85g_jNxcXPnZy-QcdJER2cchDgOU431ZNNDm3o6drE-kXlZDyNW9czFHhwfCQKx75DdlBNqPOoSq-uNehwSWWZm09lKxzRRuAGBkAxGnfjEEL7yyTczknokNpJe6KtmLL0lhkndI5gtMwme2CwRfxhVvNetThaeXJ9n7XxIxButy9BRxFV0HIMInS5Cv0lRkIQxmbMh-Un-kAJ-KxEVfqEHxnQw05R99M6Cu4X_HtUas9dMZXOdSWHNaxZbL7olOQOvb_OZFlllEQ7JcrGfEU0yn2QoDaXRrcL5LPsFwFOFHbschqYXlpfVRR_VBB5-78hDBATUbpyxNCvV2_GySKMoKjTMQvnDL7ljcN7xjYiT3L1AoXRrsRkXplmdmYkl77zGTQx5vZoPDZr9_vgI_Tzf0v65JX2_Q
+@access_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTI4NTZhOTFjYWJiODE5NGFmMjE3NmUiLCJpYXQiOjE3NjQyNTEzMzcsImV4cCI6MTc2NDQyNDEzN30.H8as-TLMgIYYhPFvmeQHTNuBXAe7XH5wgzCyy7X9GfnYgyYPccmqh2DyKajCc30vWwrXvTszELhCIq_JCuHRcb1fTqhMF951y6L9mN-ggmK_NMnRIYzUA7xYe2j2uZUfBMJn0GgqCAa35SToNwHQVgDmgJhlDS4FmDO0sVpqvOoHjh1KycMh9dEMnv7MQccl9wo4vjvDTZcokUQYaF4JoTbDIwtBlcYE_yZ7gv3kW8TDMBhMLoIXCW9l3kxBWJyNUFDS5772KB_h4jcT0cTqe37hQ8DMVARVmLwEKQT1RRFLzSPLQiIM4xEcs-lCyeBOdQWb9rcoUFEfNAaxz9eudqyQw8zWbydJB5SFtHfIBFOX_yrhNnLXPd_n7zNrdmBUY2SvaWj9rOpRwGdtab36vHOZ0GZWV9OuCwYpXmqW7HLR7N4kyYwHF2C372to15scvdYbUe6cB1Dw1GQd_OSoUYIG8aDZX2cFHO1BTjkF_FXiSbLiNLcktNmIfWNPz7OIyk3XkF82bAwktVzu8lU7HU0UhnlCSBbPcZAkyIT3dS7pjw6-GzuIDzcLwoZQV6ulhP-WN5zzNe50XQXRD5LewqJFOhEZFUmVUtoEKZ7sKVEbSIkL7YII3wOukOK6E0i77qoaZ2XSaJtHDY_tJUn_iPu3WK7FCxmYocJ881p3VqQ
+@refresh_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTI4NTZhOTFjYWJiODE5NGFmMjE3NmUiLCJpYXQiOjE3NjQyNTEzMzcsImV4cCI6MTc2NDg1NjEzN30.OuRJxw3QhexET2ski1YloE98JtWk8DKU67q9aiK5w7rsfeYhlG1T-5w2z6SVvKOxUp_YH_eBcBXVD42vbDpk6qpgYaw_ZL_JGhaP7De1eCJEVnSdloH6Fw9ZJkzUA3nD22l8Ag6DL9_D-D_leScTfFoe2qJYaCgY-VrDYqR02v4H3uwrmCAQTb23KufCGl1QDHwPg-t_g5bqSsgFxmLw7KFwDdntHyOInELdTJbrPZc400_ywOJIX9fpZSCUBcXr-oYJvkxFG3yzr9JiYRxNmfL9aZhqya73jlbMOV-z-kiMn2cLPdLTvAs6hUA-EAYwix2FuKDRCBpS3IZJJYn6vIrxkvbvhn5pQiZeFEzyfc4G34nUaNS0XTzmhxEErPRCgB5bPgQP6AUtWeqHGK850gh9j7FV1cj5ra-V_p3cBuRqNbSnbQbu2zuagH9E7pGjlSls4TgWqj3KgUzy6inRSdeT-gORwso9KNrTUCT-HpVUJdWbs7QXv-JY0xFUWAhZwUn5WnrbD9XW9QgZBUWyGcE9kHxud3YVvGrK1Xm76lTdzEbkZTkuULMKNz373BgOSIRfdy1vShmuz56fEFstaX7J474t2xuhpudeHl-GhpqIZ_RC6nyRvG_EM_sg0Bd8xGGV4EjUw1qketdCXQoEXQalcyo03g5QS2T9FyoNIJ4
 
 ### Create discount code
 POST {{url_dev}}/discount/
 Content-Type: application/json
-x-api-key: dd2eb0718527154166cc5e5d2149502ccd1e196a5a5c65ab5876732160ccc826
-x-client-key: 69280bb395d0f8058117ca82
+x-api-key: c3c035e9650d2782af88d2139eb62e08ba4a4c8e5c083a5e2ee7e9ffae9e8515
+x-client-key: 692856a91cabb8194af2176e
 Authorization: Bearer {{access_token}}
 
 {
-    "name": "Black friday",
-    "code": "SHOP_LIEM_DEV_BLACK_FRIDAY_2",
-    "value": 50000,
-    "appliesTo": "specific",
-    "desc": "Black friday have discount",
     "maxUses": 100,
-    "productIds": ["69282149b3ce940f0e677bf1"],
+    "value": 50000,
+    "code": "SHOP_222",
+    "name": "Black friday",
+    "appliesTo": "all",
+    "desc": "Black friday have discount",
+    "endDate": "2025-11-30T08:35:41.878Z",
     "startDate": "2025-11-27T08:35:41.878Z",
-    "endDate": "2025-11-30T08:35:41.878Z"
+    "productIds": ["69285755e1d62ec935fef5dd", "69285750e1d62ec935fef5d6"]
 }
 
 ### Get all discount code of shop
 GET {{url_dev}}/discount/shop/
 Content-Type: application/json
-x-api-key: dd2eb0718527154166cc5e5d2149502ccd1e196a5a5c65ab5876732160ccc826
-x-client-key: 69280bb395d0f8058117ca82
+x-api-key: c3c035e9650d2782af88d2139eb62e08ba4a4c8e5c083a5e2ee7e9ffae9e8515
+x-client-key: 692856a91cabb8194af2176e
 Authorization: Bearer {{access_token}}
 
 ### Get all products with discount code 
-GET {{url_dev}}/discount/list-product-code?code=SHOP_LIEM_DEV_BLACK_FRIDAY_2&shopId=69280bb395d0f8058117ca82
+GET {{url_dev}}/discount/list-product-code?code=SHOP_000&shopId=692856a91cabb8194af2176e
 Content-Type: application/json
-x-api-key: dd2eb0718527154166cc5e5d2149502ccd1e196a5a5c65ab5876732160ccc826
+x-api-key: c3c035e9650d2782af88d2139eb62e08ba4a4c8e5c083a5e2ee7e9ffae9e8515
+
+### Get discount amount of order
+POST {{url_dev}}/discount/amount?code=SHOP_000&shopId=692856a91cabb8194af2176e
+Content-Type: application/json
+x-api-key: c3c035e9650d2782af88d2139eb62e08ba4a4c8e5c083a5e2ee7e9ffae9e8515
+
+{
+    "products": [{
+        "_id": "69285735e1d62ec935fef5ba",
+        "quantity": 2,
+        "price": 100000 
+    },{
+        "_id": "69285735e1d62ec935fef5ba",
+        "quantity": 5,
+        "price": 100000 
+    }]
+}

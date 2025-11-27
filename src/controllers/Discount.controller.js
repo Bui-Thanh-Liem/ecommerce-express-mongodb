@@ -14,11 +14,10 @@ class DiscountCodeController {
   }
 
   async getDiscountAmount(req, res, next) {
-    const { code, shopId, products } = req.body;
-    const userId = req.keyStore.user;
+    const { code, shopId } = req.query;
+    const { products } = req.body;
     const discountAmount = await DiscountCodeService.getDiscountAmount({
       code,
-      userId,
       shopId,
       products,
     });

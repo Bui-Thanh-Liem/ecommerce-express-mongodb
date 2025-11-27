@@ -1,3 +1,4 @@
+import _ from "lodash";
 import {
   BadRequestError,
   ConflictRequestError,
@@ -110,7 +111,7 @@ class DiscountCodeService {
       // specific => productIds
       products = await ProductRepository.findAllProductsForUser({
         filters: {
-          _id: { $in: [productIds] },
+          _id: { $in: productIds },
           isPublished: true,
         },
         page: 1,
@@ -131,7 +132,7 @@ class DiscountCodeService {
       limit: 50,
       filters: { shop: shopId },
       model: discountCodeModel,
-      select: ["name", "code", "value"],
+      select: ["name", "code", "value", "appliesTo", "productIds"],
     });
   }
 
@@ -147,8 +148,10 @@ class DiscountCodeService {
       endDate,
       maxUses,
       isActive,
+      appliesTo,
       startDate,
       usersUsed,
+      productIds,
       minOrderValue,
       maxUsesPerUser,
     } = foundDiscount;
@@ -168,6 +171,21 @@ class DiscountCodeService {
       throw new BadRequestError("Discount code has expired!");
     }
 
+    // Kiểm tra appliesTo = specific thì xem productIds có các sản phẩm trong giỏ hàng không
+    // if (appliesTo === "specific") {
+    //   const productIdsInOrder = products.map((p) => p._id);
+    //   const valid = _.every(productIds, (item) =>
+    //     _.includes(productIdsInOrder, item)
+    //   );
+
+    //   //
+    //   if (!valid) {
+    //     throw new BadRequestError(
+    //       `Applies to ${appliesTo} is productIds required`
+    //     );
+    //   }
+    // }
+
     // Kiểm tra giá trị tôi thiểu của giỏ hàng (đê đủ điều kiên sử dụng)
     let totalOrder = 0;
     if (!minOrderValue) {
@@ -185,15 +203,15 @@ class DiscountCodeService {
     }
 
     // Kiểm tra xem discount này sử dụng tối đa bao nhiêu lần trên một user
-    if (!maxUsesPerUser) {
-      const userUsedDiscount = usersUsed.find((u) => u._id === userId);
+    // if (!maxUsesPerUser) {
+    //   const userUsedDiscount = usersUsed.find((u) => u._id === userId);
 
-      // Nếu user này đã sử dụng rồi thì kiêm tra thêm xem maxUsesPerUser
-      if (userUsedDiscount) {
-        console.log("maxUsesPerUser :::", maxUsesPerUser);
-        console.log("userUsedDiscount :::", userUsedDiscount);
-      }
-    }
+    //   // Nếu user này đã sử dụng rồi thì kiêm tra thêm xem maxUsesPerUser
+    //   if (userUsedDiscount) {
+    //     console.log("maxUsesPerUser :::", maxUsesPerUser);
+    //     console.log("userUsedDiscount :::", userUsedDiscount);
+    //   }
+    // }
 
     const amount = type === "fixed_amount" ? value : totalOrder * (value / 100);
 
