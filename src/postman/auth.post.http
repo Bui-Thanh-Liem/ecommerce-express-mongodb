@@ -8,7 +8,7 @@ POST {{url_dev}}/api-keys
 ### signup
 POST {{url_dev}}/shop/signup
 Content-Type: application/json
-x-api-key: 1f962bb62786a6ed8ed01a797d71d28a50561c379c3ae10e5db16cfb7dcd65fe
+x-api-key: dd2eb0718527154166cc5e5d2149502ccd1e196a5a5c65ab5876732160ccc826
 
 {
     "email": "buithanhliem@gmail.com",
@@ -18,7 +18,7 @@ x-api-key: 1f962bb62786a6ed8ed01a797d71d28a50561c379c3ae10e5db16cfb7dcd65fe
 ### login
 POST {{url_dev}}/shop/login
 Content-Type: application/json
-x-api-key: d1f72141cda389d4266d8a5604aa2c9a5bef71ea53498cf706bbd81248587d28
+x-api-key: dd2eb0718527154166cc5e5d2149502ccd1e196a5a5c65ab5876732160ccc826
 
 {
     "email": "buithanhliem@gmail.com",

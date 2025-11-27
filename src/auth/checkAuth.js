@@ -2,7 +2,7 @@ import { ForbiddenRequestError } from "../core/error.response.js";
 import { asyncHandler } from "../helpers/asyncHandler.js";
 import ApiKeyService from "../services/apiKey.service.js";
 import JWT from "jsonwebtoken";
-import keyTokenService from "../services/keyToken.service.js";
+import keyTokenService from "../services/KeyToken.service.js";
 
 const HEADER = {
   API_KEY: "x-api-key",
@@ -21,6 +21,7 @@ export async function checkApiKey(req, res, next) {
 
     // Check api
     const objKey = await ApiKeyService.findOneByKey({ key });
+
     if (!objKey) {
       return res.status(403).json({
         message: "Forbidden Error (wrong)",
@@ -75,7 +76,7 @@ export const authentication = asyncHandler(async (req, res, next) => {
   }
 
   // 3. Check accessToken missing
-  const accessToken = req.headers[HEADER.AUTHORIZATION].replace("Bearer ", "");
+  const accessToken = req.headers[HEADER.AUTHORIZATION]?.replace("Bearer ", "");
   if (!accessToken) {
     throw new ForbiddenRequestError("Forbidden Error: missing access token");
   }

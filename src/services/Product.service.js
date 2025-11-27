@@ -10,9 +10,9 @@ import ProductRepository from "../models/repositories/product.repo.js";
 
 // Registry mapping type → model con
 const ProductTypeModel = {
-  Clothing: ClothingModel,
-  Electronic: ElectronicModel,
-  Furniture: FurnitureModel,
+  clothing: ClothingModel,
+  electronic: ElectronicModel,
+  furniture: FurnitureModel,
 };
 
 // Define base Product class

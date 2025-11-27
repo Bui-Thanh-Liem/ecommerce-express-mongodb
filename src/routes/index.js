@@ -1,8 +1,9 @@
 import express from "express";
 import { checkApiKey, checkPermission } from "../auth/checkAuth.js";
-import apiKeyController from "../controllers/apiKey.controller.js";
+import apiKeyController from "../controllers/ApiKey.controller.js";
 import routeShop from "./auth/index.js";
-import productShop from "./product/index.js";
+import routeProduct from "./product/index.js";
+import routeDiscount from "./discount/index.js";
 
 const router = express.Router();
 
@@ -17,6 +18,7 @@ router.use(checkPermission("0000"));
 
 //
 router.use("/shop", routeShop);
-router.use("/product", productShop);
+router.use("/product", routeProduct);
+router.use("/discount", routeDiscount);
 
 export default router;

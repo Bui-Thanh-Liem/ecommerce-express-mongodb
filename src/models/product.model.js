@@ -2,11 +2,11 @@ import { model, Schema } from "mongoose";
 import { toSlug } from "../utils/index.js";
 
 //
-const DOCUMENT_NAME = "Product";
-const COLLECTION_NAME = "Products";
+const DOCUMENT_NAME = "product";
+const COLLECTION_NAME = "products";
 
 // Declare the Schema of the Mongo model
-const ProductSchema = new Schema(
+const productSchema = new Schema(
   {
     name: {
       type: String,
@@ -39,12 +39,12 @@ const ProductSchema = new Schema(
     type: {
       type: String,
       required: true,
-      enum: ["Electronic", "Clothing", "Furniture"],
+      enum: ["electronic", "clothing", "furniture"],
     },
     shop: {
       type: Schema.Types.ObjectId,
       required: true,
-      ref: "Shop",
+      ref: "shop",
     },
     attributes: { type: Schema.Types.Mixed, required: true },
     ratingsAverage: {
@@ -65,10 +65,10 @@ const ProductSchema = new Schema(
 );
 
 // Create text index for search
-ProductSchema.index({ name: "text", description: "text" });
+productSchema.index({ name: "text", description: "text" });
 
 // Add slug field before saving
-ProductSchema.pre("save", function (next) {
+productSchema.pre("save", function (next) {
   if (this.isModified("name")) {
     this.slug = toSlug(this.name);
   }
@@ -76,40 +76,40 @@ ProductSchema.pre("save", function (next) {
 });
 
 // Define Clothing Schema
-const ClothingSchema = new Schema(
+const clothingSchema = new Schema(
   {
-    shop: { type: Schema.Types.ObjectId, required: true, ref: "Shop" },
+    shop: { type: Schema.Types.ObjectId, required: true, ref: "shop" },
     size: String,
     material: String,
     brand: { type: String, required: true },
   },
-  { collection: "Clothing", timestamps: true }
+  { collection: "clothing", timestamps: true }
 );
 
 // Define Electronic Schema
-const ElectronicSchema = new Schema(
+const electronicSchema = new Schema(
   {
-    shop: { type: Schema.Types.ObjectId, required: true, ref: "Shop" },
+    shop: { type: Schema.Types.ObjectId, required: true, ref: "shop" },
     material: { type: String, required: true },
     manufacturer: { type: String, required: true },
     color: String,
   },
-  { collection: "Electronics", timestamps: true }
+  { collection: "electronics", timestamps: true }
 );
 
 // Define Furniture Schema
-const FurnitureSchema = new Schema(
+const furnitureSchema = new Schema(
   {
-    shop: { type: Schema.Types.ObjectId, required: true, ref: "Shop" },
+    shop: { type: Schema.Types.ObjectId, required: true, ref: "shop" },
     material: { type: String, required: true },
     dimensions: String,
     weight: Number,
   },
-  { collection: "Furniture", timestamps: true }
+  { collection: "furniture", timestamps: true }
 );
 
 // Export the model
-export const ProductModel = model(DOCUMENT_NAME, ProductSchema);
-export const ClothingModel = model("Clothing", ClothingSchema);
-export const FurnitureModel = model("Furniture", FurnitureSchema);
-export const ElectronicModel = model("Electronic", ElectronicSchema);
+export const ProductModel = model(DOCUMENT_NAME, productSchema);
+export const ClothingModel = model("clothing", clothingSchema);
+export const FurnitureModel = model("furniture", furnitureSchema);
+export const ElectronicModel = model("electronic", electronicSchema);

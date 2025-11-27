@@ -1,8 +1,8 @@
 import { model, Schema } from "mongoose";
 
 //
-const DOCUMENT_NAME = "ApiKey";
-const COLLECTION_NAME = "ApiKeys";
+const DOCUMENT_NAME = "apiKey";
+const COLLECTION_NAME = "apiKeys";
 
 // Declare the Schema of the Mongo model
 var apiKeySchema = new Schema(

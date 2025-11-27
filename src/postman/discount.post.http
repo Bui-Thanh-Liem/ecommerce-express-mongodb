@@ -1,0 +1,34 @@
+@url_dev=http://localhost:9000/api/v1
+@access_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTI4MGJiMzk1ZDBmODA1ODExN2NhODIiLCJpYXQiOjE3NjQyMzIxMzIsImV4cCI6MTc2NDQwNDkzMn0.75rh6uNBXw713mPSQiC11Kz49PkhiO5HLg0k7I3j8d84bnYmitLoSPB3_6ALIE4q2XlTjXon0jyKNmpZgJWcB2XPfcqf_ujVb5ZZnPoiulb2dBiQU7-uR3wT_t78nfHK7irO7nWMvL4p691FC-Rd1UPIoPhfpZPa9hcJKi5czrB0V42DM3O3ole7SHPxrX8vYuMN9Iz-P4_HhvxpCV9jrc7BfC4o49_6DVJ7wN6HRFQILz7rOdEvwVhB71hC_a9oBHKjw6b8a9Qbx7QlaXrqoW9imIHbeF0S8G8OtruZEQBbrcL2ytu7mT3veXKp-gMZHl6yR0oQ4OLeonGX8MFQib4zuTOuvVY5yHPLuKxJz5RC6Ivw-CCJZZAX7iAmuW5anGaaUIsAvsmAlacL5g0wy2RABSEdQYmSMpXFOV48iwmue0LBzKd0soJ6cs1m7TJ6BPuR8mQfyHce4-MLpesUZkPL-emLMsdOMR0A6ifqQJNFBQVdBM4q2HPLA_UYobcXDmktnDOwA1L2-XjPOASLTzRZ8aTIbW0X6huSpJ94bjPqwEZzz7Z6h7y5InAMYxuxB994qCJbEEq0fEIdT5bapu00fe8UvySu7r9SOnw3p3FQXNhjeklOnhFoZTeQsHaW9Sw2lYq-YBid07lsNdIsw2dPAVuo6eAJRfGZWw9fBNo
+@refresh_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTI4MGJiMzk1ZDBmODA1ODExN2NhODIiLCJpYXQiOjE3NjQyMzIxMzIsImV4cCI6MTc2NDgzNjkzMn0.EX3YJMjShcvD7zeztAz0Sm3pxAWcU6m9Y2ZO6k17fBIHeiginyWQESknaebwwq4alN0vSwAbrS00ahYbXtdTa1uMQyCsWQ3mH2xx5Rc8Z_Y6aFky8chZIG9Q5vLut3WRShuYx6E80TogYE2GYhEWlsONPNrm10eodYuOXQ6szOd48R4dbU0tOEKjas9XtU-LCoJDWzNHqW_gvzgzFhy7F0cD3turO2EER2T8sR7dTmo3RNodItrH2kfqQnZVrIwHor9RoUKGetq85g_jNxcXPnZy-QcdJER2cchDgOU431ZNNDm3o6drE-kXlZDyNW9czFHhwfCQKx75DdlBNqPOoSq-uNehwSWWZm09lKxzRRuAGBkAxGnfjEEL7yyTczknokNpJe6KtmLL0lhkndI5gtMwme2CwRfxhVvNetThaeXJ9n7XxIxButy9BRxFV0HIMInS5Cv0lRkIQxmbMh-Un-kAJ-KxEVfqEHxnQw05R99M6Cu4X_HtUas9dMZXOdSWHNaxZbL7olOQOvb_OZFlllEQ7JcrGfEU0yn2QoDaXRrcL5LPsFwFOFHbschqYXlpfVRR_VBB5-78hDBATUbpyxNCvV2_GySKMoKjTMQvnDL7ljcN7xjYiT3L1AoXRrsRkXplmdmYkl77zGTQx5vZoPDZr9_vgI_Tzf0v65JX2_Q
+
+### Create discount code
+POST {{url_dev}}/discount/
+Content-Type: application/json
+x-api-key: dd2eb0718527154166cc5e5d2149502ccd1e196a5a5c65ab5876732160ccc826
+x-client-key: 69280bb395d0f8058117ca82
+Authorization: Bearer {{access_token}}
+
+{
+    "name": "Black friday",
+    "code": "SHOP_LIEM_DEV_BLACK_FRIDAY_2",
+    "value": 50000,
+    "appliesTo": "specific",
+    "desc": "Black friday have discount",
+    "maxUses": 100,
+    "productIds": ["69282149b3ce940f0e677bf1"],
+    "startDate": "2025-11-27T08:35:41.878Z",
+    "endDate": "2025-11-30T08:35:41.878Z"
+}
+
+### Get all discount code of shop
+GET {{url_dev}}/discount/shop/
+Content-Type: application/json
+x-api-key: dd2eb0718527154166cc5e5d2149502ccd1e196a5a5c65ab5876732160ccc826
+x-client-key: 69280bb395d0f8058117ca82
+Authorization: Bearer {{access_token}}
+
+### Get all products with discount code 
+GET {{url_dev}}/discount/list-product-code?code=SHOP_LIEM_DEV_BLACK_FRIDAY_2&shopId=69280bb395d0f8058117ca82
+Content-Type: application/json
+x-api-key: dd2eb0718527154166cc5e5d2149502ccd1e196a5a5c65ab5876732160ccc826

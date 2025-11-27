@@ -1,8 +1,8 @@
 import { model, Schema } from "mongoose";
 
 //
-const DOCUMENT_NAME = "Key";
-const COLLECTION_NAME = "Keys";
+const DOCUMENT_NAME = "key";
+const COLLECTION_NAME = "keys";
 
 // Declare the Schema of the Mongo model
 var keyTokenSchema = new Schema(
@@ -10,7 +10,7 @@ var keyTokenSchema = new Schema(
     user: {
       type: Schema.Types.ObjectId,
       required: true,
-      ref: "Shop",
+      ref: "shop",
     },
     publicKey: {
       type: String,
