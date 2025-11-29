@@ -1,16 +1,16 @@
 @url_dev=http://localhost:9000/api/v1
-@access_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTI4NTZhOTFjYWJiODE5NGFmMjE3NmUiLCJpYXQiOjE3NjQyNTEzMzcsImV4cCI6MTc2NDQyNDEzN30.H8as-TLMgIYYhPFvmeQHTNuBXAe7XH5wgzCyy7X9GfnYgyYPccmqh2DyKajCc30vWwrXvTszELhCIq_JCuHRcb1fTqhMF951y6L9mN-ggmK_NMnRIYzUA7xYe2j2uZUfBMJn0GgqCAa35SToNwHQVgDmgJhlDS4FmDO0sVpqvOoHjh1KycMh9dEMnv7MQccl9wo4vjvDTZcokUQYaF4JoTbDIwtBlcYE_yZ7gv3kW8TDMBhMLoIXCW9l3kxBWJyNUFDS5772KB_h4jcT0cTqe37hQ8DMVARVmLwEKQT1RRFLzSPLQiIM4xEcs-lCyeBOdQWb9rcoUFEfNAaxz9eudqyQw8zWbydJB5SFtHfIBFOX_yrhNnLXPd_n7zNrdmBUY2SvaWj9rOpRwGdtab36vHOZ0GZWV9OuCwYpXmqW7HLR7N4kyYwHF2C372to15scvdYbUe6cB1Dw1GQd_OSoUYIG8aDZX2cFHO1BTjkF_FXiSbLiNLcktNmIfWNPz7OIyk3XkF82bAwktVzu8lU7HU0UhnlCSBbPcZAkyIT3dS7pjw6-GzuIDzcLwoZQV6ulhP-WN5zzNe50XQXRD5LewqJFOhEZFUmVUtoEKZ7sKVEbSIkL7YII3wOukOK6E0i77qoaZ2XSaJtHDY_tJUn_iPu3WK7FCxmYocJ881p3VqQ
-@refresh_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTI4NTZhOTFjYWJiODE5NGFmMjE3NmUiLCJpYXQiOjE3NjQyNTEzMzcsImV4cCI6MTc2NDg1NjEzN30.OuRJxw3QhexET2ski1YloE98JtWk8DKU67q9aiK5w7rsfeYhlG1T-5w2z6SVvKOxUp_YH_eBcBXVD42vbDpk6qpgYaw_ZL_JGhaP7De1eCJEVnSdloH6Fw9ZJkzUA3nD22l8Ag6DL9_D-D_leScTfFoe2qJYaCgY-VrDYqR02v4H3uwrmCAQTb23KufCGl1QDHwPg-t_g5bqSsgFxmLw7KFwDdntHyOInELdTJbrPZc400_ywOJIX9fpZSCUBcXr-oYJvkxFG3yzr9JiYRxNmfL9aZhqya73jlbMOV-z-kiMn2cLPdLTvAs6hUA-EAYwix2FuKDRCBpS3IZJJYn6vIrxkvbvhn5pQiZeFEzyfc4G34nUaNS0XTzmhxEErPRCgB5bPgQP6AUtWeqHGK850gh9j7FV1cj5ra-V_p3cBuRqNbSnbQbu2zuagH9E7pGjlSls4TgWqj3KgUzy6inRSdeT-gORwso9KNrTUCT-HpVUJdWbs7QXv-JY0xFUWAhZwUn5WnrbD9XW9QgZBUWyGcE9kHxud3YVvGrK1Xm76lTdzEbkZTkuULMKNz373BgOSIRfdy1vShmuz56fEFstaX7J474t2xuhpudeHl-GhpqIZ_RC6nyRvG_EM_sg0Bd8xGGV4EjUw1qketdCXQoEXQalcyo03g5QS2T9FyoNIJ4
+@access_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTJhNjQxODNlY2VjMjk2MmM3YWJhMDkiLCJpYXQiOjE3NjQzODU5NzEsImV4cCI6MTc2NDU1ODc3MX0.CyEN6wpKpUWVGnj2sbZnlK8f67KKbUVnghKOmNuQLxx_FTKm_SF63srU9aNjxRq_jvftExCOe_0ViVfxI7fS6sZmTdhL4SpiMm7bLreGEFK5EGehr5J19bm1XJMQnmst18DOJ9zj7lzWLtflmo_-wb45qw2kGdInvErntVdQyuf4v5GLHYyfI7m9LBJXzi9KxmT1S219zmonZnj4wsJiTVOc1oJMMcdpj0Tc-VEqvypRmz_uA9N4P-tnvpiWbr4k1C71a8dBlaF9ZV6H1aOSmHaRIqo3v-iHh5IeuCulplG36NI7x8rXlvs0PU29IMOUvIblDle9-VldYF6x_ZGn6ZBjpq7s1UsdRZNYAT9DxZeyHkoeizIH8cwb96Oy8VOKCemdTsCC1YiXz49GIguSM9f93-7waxvtS9M3BwIPEYXMRprXj2BAzmvN4yBlj5AAz6ogRU2ixneRhjWEBqC1sRXc9Z8pZEu_sEccD7o-bkH5NUCmyYlhPew8THln5-KJvITncxX2SFRGdLy_AegC3XkjGVTLO6XNP1-H1Usqk3AW83KKHsb_7ncBlhPPdGUTjVovSPRPSfHPUyS3o_-RojJlPEQmUPWLsalbJsjxPhx2rqagBh2QMesMGGyXHsH5s8kWxLF8r5MvyGmEmQvZxD61qNTqtEwmoG0uEXSL360
+@refresh_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTJhNjQxODNlY2VjMjk2MmM3YWJhMDkiLCJpYXQiOjE3NjQzODU5NzEsImV4cCI6MTc2NDk5MDc3MX0.nEpfCJOKMdg0hVW9-YwTmOWckR1gp-wZ1EwC_HD2CXbaXDIVX2ghdnfFs5FgGol2QJjLoH4xjSAF0Xr2shLYqDlCOl7UmMXsQLiQ6fHfrk1J-tf3qNlUao5LeL9yVEc0LzFX4sCI8CMrsOrqIzkzBNuxRpzSI-PxYKdi9WbCjxWoLQw72Ou7GiiDFDjyF84IIrXCQpDT6uQCzb8jpqBR4PGKFtC1gWuqxCizZ7pnE8lB1LpK6iw7Dm70fRvqIFoFDaXynyEcvxFrYTlw0M3tbedYQaIJWyAZwOoFDEopjLZudUaISNejpeYSi2uGCoV_olo6F6fSn_DtjFK_EgQfFWOx2rpZ9Yv7j3O0J7OeH59k54iGY_SHMdcfHN4lid1jX0nkPMVemGE1m6XNJTc2AhQn15LoiCB6YSyXVJx2mFEHRSp1I6Yoe8b4sKUB8xZqo37CtWPvcG6ZpeBrGVzjmc6XnN0CvKvGGsMr3X0o5Q2Uv12Ha89x9ww_TbvW-4u9AFQjwtnpcHzzSBg8FRczV4lSQWEZKm13jf5TrNC5rAWfNjt7UJRhBb-nVhsidJWGcIV5DguuQOrp5XN0JtTQewTg9FsjZRoOEuB16hzdPizWpzZSLBlW12QVrPwNhmJuv8gpxFzc0YjfXPPWpS9rR7snoCJmwcw6MBbNQ7geAu0
 
 ### cerate product
 POST {{url_dev}}/product/
 Content-Type: application/json
-x-api-key: c3c035e9650d2782af88d2139eb62e08ba4a4c8e5c083a5e2ee7e9ffae9e8515
-x-client-key: 692856a91cabb8194af2176e
+x-api-key: 018f3027501094af9877f52528384d50c0dfd2bbc06a8ed02000a9d41a893924
+x-client-key: 692a64183ecec2962c7aba09
 Authorization: Bearer {{access_token}}
 
 {
-    "name": "Ghế quỳ hiện đại 10",
+    "name": "Ghế đứng hiện đại",
     "thumb": "https://example.com/images/sofa.jpg",
     "desc": "Ghế sofa hiện đại với thiết kế sang trọng và thoải mái.",
     "price": 500,
@@ -26,8 +26,8 @@ Authorization: Bearer {{access_token}}
 ### update product
 PATCH {{url_dev}}/product/69271b152228deeb7c258501
 Content-Type: application/json
-x-api-key: c3c035e9650d2782af88d2139eb62e08ba4a4c8e5c083a5e2ee7e9ffae9e8515
-x-client-key: 692856a91cabb8194af2176e
+x-api-key: 018f3027501094af9877f52528384d50c0dfd2bbc06a8ed02000a9d41a893924
+x-client-key: 692a64183ecec2962c7aba09
 Authorization: Bearer {{access_token}}
 
 {
@@ -39,50 +39,50 @@ Authorization: Bearer {{access_token}}
 }
 
 ### publish product by id
-POST {{url_dev}}/product/publish/69285746e1d62ec935fef5c8
+POST {{url_dev}}/product/publish/692a650b3ecec2962c7aba2d
 Content-Type: application/json
-x-api-key: c3c035e9650d2782af88d2139eb62e08ba4a4c8e5c083a5e2ee7e9ffae9e8515
-x-client-key: 692856a91cabb8194af2176e
+x-api-key: 018f3027501094af9877f52528384d50c0dfd2bbc06a8ed02000a9d41a893924
+x-client-key: 692a64183ecec2962c7aba09
 Authorization: Bearer {{access_token}}
 
 ### unPublish product by id
 POST {{url_dev}}/product/unpublish/6926a6013ad38d006b2287ce
 Content-Type: application/json
-x-api-key: c3c035e9650d2782af88d2139eb62e08ba4a4c8e5c083a5e2ee7e9ffae9e8515
-x-client-key: 692856a91cabb8194af2176e
+x-api-key: 018f3027501094af9877f52528384d50c0dfd2bbc06a8ed02000a9d41a893924
+x-client-key: 692a64183ecec2962c7aba09
 Authorization: Bearer {{access_token}}
 
 ### find all draft products for shop
 GET {{url_dev}}/product/drafts/all?limit=50&skip=0
 Content-Type: application/json
-x-api-key: c3c035e9650d2782af88d2139eb62e08ba4a4c8e5c083a5e2ee7e9ffae9e8515
-x-client-key: 692856a91cabb8194af2176e
+x-api-key: 018f3027501094af9877f52528384d50c0dfd2bbc06a8ed02000a9d41a893924
+x-client-key: 692a64183ecec2962c7aba09
 Authorization: Bearer {{access_token}}
 
 ### find all published products for shop
 GET {{url_dev}}/product/published/all?limit=50&skip=0
 Content-Type: application/json
-x-api-key: c3c035e9650d2782af88d2139eb62e08ba4a4c8e5c083a5e2ee7e9ffae9e8515
-x-client-key: 692856a91cabb8194af2176e
+x-api-key: 018f3027501094af9877f52528384d50c0dfd2bbc06a8ed02000a9d41a893924
+x-client-key: 692a64183ecec2962c7aba09
 Authorization: Bearer {{access_token}}
 
 ### search products by user
 GET {{url_dev}}/product/search/sofa
 Content-Type: application/json
-x-api-key: c3c035e9650d2782af88d2139eb62e08ba4a4c8e5c083a5e2ee7e9ffae9e8515
-x-client-key: 692856a91cabb8194af2176e
+x-api-key: 018f3027501094af9877f52528384d50c0dfd2bbc06a8ed02000a9d41a893924
+x-client-key: 692a64183ecec2962c7aba09
 Authorization: Bearer {{access_token}}
 
 ### find all products for user
 GET {{url_dev}}/product/
 Content-Type: application/json
-x-api-key: c3c035e9650d2782af88d2139eb62e08ba4a4c8e5c083a5e2ee7e9ffae9e8515
-x-client-key: 692856a91cabb8194af2176e
+x-api-key: 018f3027501094af9877f52528384d50c0dfd2bbc06a8ed02000a9d41a893924
+x-client-key: 692a64183ecec2962c7aba09
 Authorization: Bearer {{access_token}}
 
 ### find product for user
 GET {{url_dev}}/product/6926a6013ad38d006b2287ce
 Content-Type: application/json
-x-api-key: c3c035e9650d2782af88d2139eb62e08ba4a4c8e5c083a5e2ee7e9ffae9e8515
-x-client-key: 692856a91cabb8194af2176e
+x-api-key: 018f3027501094af9877f52528384d50c0dfd2bbc06a8ed02000a9d41a893924
+x-client-key: 692a64183ecec2962c7aba09
 Authorization: Bearer {{access_token}}

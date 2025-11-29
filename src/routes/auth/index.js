@@ -1,6 +1,6 @@
 import express from "express";
 import { authentication } from "../../auth/checkAuth.js";
-import authController from "../../controllers/auth.controller.js";
+import authController from "../../controllers/Auth.controller.js";
 import { asyncHandler } from "../../helpers/asyncHandler.js";
 
 const router = express.Router();

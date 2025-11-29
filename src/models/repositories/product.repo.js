@@ -1,19 +1,18 @@
 import { Types } from "mongoose";
-import { ProductModel } from "../product.model.js";
 import {
   getSelectData,
   getUnSelectData,
   removeFalsyObj,
+  stringToObjectId,
   updateNestedObjParser,
 } from "../../utils/index.js";
+import { ProductModel } from "../product.model.js";
 
 class ProductRepository {
   //
   static async findOneAndUpdate({ id, payload, model, isNew = true }) {
     //
     const nested = updateNestedObjParser(removeFalsyObj(payload));
-    console.log("removeFalsyObj(payload):::", removeFalsyObj(payload));
-    console.log("findOneAndUpdate:::", nested);
 
     return await model.findByIdAndUpdate(id, nested, {
       new: isNew,
@@ -75,7 +74,7 @@ class ProductRepository {
   //
   static async togglePublishProduct({ productId, shopId, publish }) {
     const foundProduct = await ProductModel.findOne({
-      _id: new Types.ObjectId(String(productId)),
+      _id: stringToObjectId(productId),
       shop: shopId,
     });
 
@@ -98,6 +97,14 @@ class ProductRepository {
       .sort(sortBy)
       .skip(skip)
       .limit(limit)
+      .lean()
+      .exec();
+  }
+
+  //
+  static async findOneById({ id, select = ["name"] }) {
+    return await ProductModel.findOne({ _id: id, isPublished: true })
+      .select(getSelectData(select))
       .lean()
       .exec();
   }

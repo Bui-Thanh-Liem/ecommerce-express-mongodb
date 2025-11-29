@@ -1,0 +1,54 @@
+@url_dev=http://localhost:9000/api/v1
+@access_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTI4NTZhOTFjYWJiODE5NGFmMjE3NmUiLCJpYXQiOjE3NjQyNTEzMzcsImV4cCI6MTc2NDQyNDEzN30.H8as-TLMgIYYhPFvmeQHTNuBXAe7XH5wgzCyy7X9GfnYgyYPccmqh2DyKajCc30vWwrXvTszELhCIq_JCuHRcb1fTqhMF951y6L9mN-ggmK_NMnRIYzUA7xYe2j2uZUfBMJn0GgqCAa35SToNwHQVgDmgJhlDS4FmDO0sVpqvOoHjh1KycMh9dEMnv7MQccl9wo4vjvDTZcokUQYaF4JoTbDIwtBlcYE_yZ7gv3kW8TDMBhMLoIXCW9l3kxBWJyNUFDS5772KB_h4jcT0cTqe37hQ8DMVARVmLwEKQT1RRFLzSPLQiIM4xEcs-lCyeBOdQWb9rcoUFEfNAaxz9eudqyQw8zWbydJB5SFtHfIBFOX_yrhNnLXPd_n7zNrdmBUY2SvaWj9rOpRwGdtab36vHOZ0GZWV9OuCwYpXmqW7HLR7N4kyYwHF2C372to15scvdYbUe6cB1Dw1GQd_OSoUYIG8aDZX2cFHO1BTjkF_FXiSbLiNLcktNmIfWNPz7OIyk3XkF82bAwktVzu8lU7HU0UhnlCSBbPcZAkyIT3dS7pjw6-GzuIDzcLwoZQV6ulhP-WN5zzNe50XQXRD5LewqJFOhEZFUmVUtoEKZ7sKVEbSIkL7YII3wOukOK6E0i77qoaZ2XSaJtHDY_tJUn_iPu3WK7FCxmYocJ881p3VqQ
+@refresh_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTI4NTZhOTFjYWJiODE5NGFmMjE3NmUiLCJpYXQiOjE3NjQyNTEzMzcsImV4cCI6MTc2NDg1NjEzN30.OuRJxw3QhexET2ski1YloE98JtWk8DKU67q9aiK5w7rsfeYhlG1T-5w2z6SVvKOxUp_YH_eBcBXVD42vbDpk6qpgYaw_ZL_JGhaP7De1eCJEVnSdloH6Fw9ZJkzUA3nD22l8Ag6DL9_D-D_leScTfFoe2qJYaCgY-VrDYqR02v4H3uwrmCAQTb23KufCGl1QDHwPg-t_g5bqSsgFxmLw7KFwDdntHyOInELdTJbrPZc400_ywOJIX9fpZSCUBcXr-oYJvkxFG3yzr9JiYRxNmfL9aZhqya73jlbMOV-z-kiMn2cLPdLTvAs6hUA-EAYwix2FuKDRCBpS3IZJJYn6vIrxkvbvhn5pQiZeFEzyfc4G34nUaNS0XTzmhxEErPRCgB5bPgQP6AUtWeqHGK850gh9j7FV1cj5ra-V_p3cBuRqNbSnbQbu2zuagH9E7pGjlSls4TgWqj3KgUzy6inRSdeT-gORwso9KNrTUCT-HpVUJdWbs7QXv-JY0xFUWAhZwUn5WnrbD9XW9QgZBUWyGcE9kHxud3YVvGrK1Xm76lTdzEbkZTkuULMKNz373BgOSIRfdy1vShmuz56fEFstaX7J474t2xuhpudeHl-GhpqIZ_RC6nyRvG_EM_sg0Bd8xGGV4EjUw1qketdCXQoEXQalcyo03g5QS2T9FyoNIJ4
+
+### Create a cart
+POST {{url_dev}}/cart/
+Content-Type: application/json
+x-api-key: 018f3027501094af9877f52528384d50c0dfd2bbc06a8ed02000a9d41a893924
+
+{
+    "userId": "692a64cf3ecec2962c7aba10",
+    "product": {
+        "_id": "692a65013ecec2962c7aba26",
+        "quantity": 1
+    }
+}
+
+### Update a cart
+POST {{url_dev}}/cart/update
+Content-Type: application/json
+x-api-key: 018f3027501094af9877f52528384d50c0dfd2bbc06a8ed02000a9d41a893924
+
+{
+    "userId": "692a64cf3ecec2962c7aba10",
+    "shopOrderIds": [
+        {
+            "shopId": "692a64183ecec2962c7aba09",
+            "itemProducts": [
+                {
+                    "quantity": 0, 
+                    "oldQuantity": 1 ,
+                    "shopId": "692a64183ecec2962c7aba09",
+                    "productId": "692a65013ecec2962c7aba26"
+                }
+            ],
+            "version": 100
+        }
+    ]
+}
+
+### Delete product item
+DELETE  {{url_dev}}/cart/
+Content-Type: application/json
+x-api-key: 018f3027501094af9877f52528384d50c0dfd2bbc06a8ed02000a9d41a893924
+
+{
+    "userId": "692a64cf3ecec2962c7aba10",
+    "productId": "692a65013ecec2962c7aba26"
+}
+
+### Get a cart
+GET {{url_dev}}/cart?userId=692a64cf3ecec2962c7aba10
+Content-Type: application/json
+x-api-key: 018f3027501094af9877f52528384d50c0dfd2bbc06a8ed02000a9d41a893924

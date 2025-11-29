@@ -69,3 +69,7 @@ export function updateNestedObjParser(obj, prefix = "") {
 
   return final;
 }
+
+export function stringToObjectId(str) {
+  return new Types.ObjectId(String(str));
+}

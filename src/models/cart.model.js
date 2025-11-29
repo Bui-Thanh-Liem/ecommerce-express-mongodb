@@ -21,8 +21,9 @@ var cartSchema = new Schema(
       default: 0,
     },
     userId: {
-      type: Number,
-      default: 0,
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: "user",
     },
   },
   { timestamps: true, collection: COLLECTION_NAME }
