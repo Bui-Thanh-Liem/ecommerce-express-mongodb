@@ -4,6 +4,7 @@ import apiKeyController from "../controllers/ApiKey.controller.js";
 import routeShop from "./auth/index.js";
 import routeCart from "./cart/index.js";
 import routeDiscount from "./discount/index.js";
+import routeCheckout from "./checkout/index.js";
 import routeProduct from "./product/index.js";
 
 const router = express.Router();
@@ -22,5 +23,6 @@ router.use("/shop", routeShop);
 router.use("/product", routeProduct);
 router.use("/discount", routeDiscount);
 router.use("/cart", routeCart);
+router.use("/checkout", routeCheckout);
 
 export default router;

@@ -1,4 +1,3 @@
-import { Types } from "mongoose";
 import {
   getSelectData,
   getUnSelectData,
@@ -116,6 +115,25 @@ class ProductRepository {
       .populate("shop", "name email _id")
       .lean()
       .exec();
+  }
+
+  static async checkProductByServer({ products }) {
+    return await Promise.all(
+      products.map(async (product) => {
+        const foundProd = await ProductRepository.findOneById({
+          id: product._id,
+          select: ["price", "quantity", "_id"],
+        });
+
+        if (foundProd) {
+          return {
+            _id: foundProd._id,
+            price: foundProd.price,
+            quantity: foundProd.quantity,
+          };
+        }
+      })
+    );
   }
 }
 
