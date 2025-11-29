@@ -129,7 +129,7 @@ class ProductRepository {
           return {
             _id: foundProd._id,
             price: foundProd.price,
-            quantity: foundProd.quantity,
+            quantity: product.quantity,
           };
         }
       })

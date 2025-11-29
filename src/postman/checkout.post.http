@@ -2,50 +2,82 @@
 @access_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTJhNjQxODNlY2VjMjk2MmM3YWJhMDkiLCJpYXQiOjE3NjQ0MDM3MTUsImV4cCI6MTc2NDU3NjUxNX0.DxPK2EdNtiAPnF4a7ge0_Z5AhcFnl13MFWKAIVJLwMRFpL3yUNQ2PkdRTyjUsgl1lEn9KFg6bRADuVOCcd0F_KrXfZg8DinusQnEls-3qtGdyL4dSP6BDE8jYIpRnsJoy71O-F903zCbLelUQrrkz_WcLMCa-TENTuwUHdarMhKu01CKXNb9GGdPD66u-sYWtccrn5hWwYnIPA4IV2DP3vI51Mb3mPNuPLli2x1DTehCYRziz5iWzQ1A00pbIzSJa8d98f3Ij8apIddCn9G7ejjW8ySJTMHjxgTistDvvLzdo_vegOfa7Rn-BDXs6GDWHjMlHu6rZGz0JjKEgnFdYiytlZ4ztTHt5_M9-q2aUWvkfcCzQTf6bWtsG08XU5Hc59rHau_JLDztAqPMDRylTMZUE4idL62GVZ0su78LDzXbN_hrom0tGNakpZjO_hCgiFm2HRb1MKAlrMKnqGmYdNwEEf17ULtpKR1gak9O5EU0FnoBr5USfdYZH2PFde5VSk0RIAorph2qRu3j2BUEzsgc_Sk1xpSsvXPtOZtclDtpdz46tZNIsHyaYprWN8PbgKdKn4b28vW2Zq26Io5XsRYrF70dSEGfLSdyeODa7WZiQsaWUPCcIlXyf-SKqZ884S8IJpXRS1JvQvd4ZPiBHFW_koTjzrF79xrzchC8DAE
 @refresh_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTJhNjQxODNlY2VjMjk2MmM3YWJhMDkiLCJpYXQiOjE3NjQ0MDM3MTUsImV4cCI6MTc2NTAwODUxNX0.V6oTCmqyYCgsT6GtgXDKZuqRccpo7gZnHrAA5Gd-FRou9W8L8QkPDcGfE8MLyhKQUO7C42Uv_0TbwBjqlrpUD94aKBVvpKAEfoA1OCPo7LSqb9mpWD_LJ_SUuqK0wIvj5-rFSfMFPuYKP6Vjjt-_cU6Xb_QK7Bjm5mLTuxIIonYRacwRbNF1KOZSslAInWvoTxyUwbYTtMVI8s1YSOZDZ1fiXFpdHkJ9EwM-r7wcKrEAlSqos1KDnxXW6-48CxqLcpnPKdmvLPrxWSLYgcL2XtGaPxBW_GmNraLaR15deocaxi5UfhYH2ij8gj090IzGpOQQmMU3nwbvBoshC7lw5fqRu7tJKmZIWnDyWP5gAM8dHxQED3TifmDnNO-5DEqMNCS91hafZ85VlVyR3yiXaViGwNgh5TOrOWeJ-ZOnkQp-Oji7Oqcud7DvO9S_AdWhe3rbLZRTs1kyhh_uvL7jEnBn-n-XCWXRTnH223VQT2jVSU5-b8io_Q9ONJh3xoqixdQNcKuN4icT12FLd637Dq7R68dsAZthk65TqSp8AhjY1LEulcEWnU7aSN2w1fCtykMNi-Pz1UrBVsDu6VUSGws0h2_XZYXNSSxoCOgNBWJ9-9dxW_PZ2-ktU-LH9eB3UaugaEauVzi-5w5CED-yus1HdJaszK32D9vNyjJu1LM
 
-### Create discount code
-POST {{url_dev}}/discount/
+### Checkout review
+POST {{url_dev}}/checkout/review
 Content-Type: application/json
 x-api-key: 018f3027501094af9877f52528384d50c0dfd2bbc06a8ed02000a9d41a893924
 x-client-key: 692a64183ecec2962c7aba09
 Authorization: Bearer {{access_token}}
 
 {
-    "maxUses": 100,
-    "value": 50000,
-    "code": "SHOP_000",
-    "name": "Black friday",
-    "appliesTo": "all",
-    "desc": "Black friday have discount",
-    "endDate": "2025-11-30T08:35:41.878Z",
-    "startDate": "2025-11-27T08:35:41.878Z",
-    "productIds": []
+    "cartId": "692a7b5a6f112a4546bd1674",
+    "userId": "692a64cf3ecec2962c7aba10",
+    "shopOrderIds": [
+        {
+            "shopId": "692a64183ecec2962c7aba09", 
+            "shopDiscounts": [
+                {
+                    "code": "SHOP_000"
+                }
+            ],
+            "itemProducts": [
+                {
+                    "_id": "692a65013ecec2962c7aba26",
+                    "shopId": "692a64183ecec2962c7aba09",
+                    "quantity": 6
+                }
+            ]
+        },
+        {
+            "shopId": "692aaacea52c29f5545e8e1b", 
+            "shopDiscounts": [],
+            "itemProducts": [
+                {
+                    "_id": "692aab34a52c29f5545e8e25",
+                    "shopId": "692aaacea52c29f5545e8e1b",
+                    "quantity": 10
+                }
+            ]
+        }
+    ]
 }
 
-### Get all discount code of shop
-GET {{url_dev}}/discount/shop/
+### checkout order
+POST {{url_dev}}/checkout/order
 Content-Type: application/json
 x-api-key: 018f3027501094af9877f52528384d50c0dfd2bbc06a8ed02000a9d41a893924
 x-client-key: 692a64183ecec2962c7aba09
 Authorization: Bearer {{access_token}}
 
-### Get all products with discount code 
-GET {{url_dev}}/discount/list-product-code?code=SHOP_000&shopId=692a64183ecec2962c7aba09
-Content-Type: application/json
-x-api-key: 018f3027501094af9877f52528384d50c0dfd2bbc06a8ed02000a9d41a893924
-
-### Get discount amount of order
-POST {{url_dev}}/discount/amount?code=SHOP_000&shopId=692a64183ecec2962c7aba09
-Content-Type: application/json
-x-api-key: 018f3027501094af9877f52528384d50c0dfd2bbc06a8ed02000a9d41a893924
-
 {
-    "products": [{
-        "_id": "69285735e1d62ec935fef5ba",
-        "quantity": 2,
-        "price": 100000 
-    },{
-        "_id": "69285735e1d62ec935fef5ba",
-        "quantity": 5,
-        "price": 100000 
-    }]
+    "cartId": "692a7b5a6f112a4546bd1674",
+    "userId": "692a64cf3ecec2962c7aba10",
+    "shopOrderIds": [
+        {
+            "shopId": "692a64183ecec2962c7aba09", 
+            "shopDiscounts": [
+                {
+                    "code": "SHOP_000"
+                }
+            ],
+            "itemProducts": [
+                {
+                    "_id": "692a65013ecec2962c7aba26",
+                    "shopId": "692a64183ecec2962c7aba09",
+                    "quantity": 6
+                }
+            ]
+        },
+        {
+            "shopId": "692aaacea52c29f5545e8e1b", 
+            "shopDiscounts": [],
+            "itemProducts": [
+                {
+                    "_id": "692aab34a52c29f5545e8e25",
+                    "shopId": "692aaacea52c29f5545e8e1b",
+                    "quantity": 10
+                }
+            ]
+        }
+    ]
 }

@@ -255,6 +255,8 @@ class DiscountCodeService {
 
   // PRIVATE
   async checkExist({ shop, code }) {
+    console.log("checkExist:::", { shop, code });
+
     // check tồn tại
     const foundDiscount = await DiscountCodeRepository.findOneByFilter({
       code,

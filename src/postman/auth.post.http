@@ -11,7 +11,7 @@ Content-Type: application/json
 x-api-key: 018f3027501094af9877f52528384d50c0dfd2bbc06a8ed02000a9d41a893924
 
 {
-    "email": "buithanhliem@gmail.com",
+    "email": "buithanhliem2@gmail.com",
     "password": "liemdev@123"
 }
 
@@ -21,7 +21,7 @@ Content-Type: application/json
 x-api-key: 018f3027501094af9877f52528384d50c0dfd2bbc06a8ed02000a9d41a893924
 
 {
-    "email": "buithanhliem@gmail.com",
+    "email": "buithanhliem2@gmail.com",
     "password": "liemdev@123"
 }
 

@@ -7,6 +7,10 @@ const development = {
     port: process.env.DEV_DB_PORT,
     name: process.env.DEV_DB_NAME,
   },
+  redis: {
+    host: process.env.DEV_REDIS_HOST,
+    port: process.env.DEV_REDIS_PORT,
+  },
 };
 
 const production = {
@@ -17,6 +21,10 @@ const production = {
     host: process.env.PROD_DB_HOST,
     port: process.env.PROD_DB_PORT,
     name: process.env.PROD_DB_NAME,
+  },
+  redis: {
+    host: process.env.DEV_REDIS_HOST,
+    port: process.env.DEV_REDIS_PORT,
   },
 };
 

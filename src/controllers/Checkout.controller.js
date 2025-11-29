@@ -8,4 +8,11 @@ export class CheckoutController {
       metadata: await CheckoutService.checkoutReview(req.body),
     }).send(res);
   }
+
+  static async orderByUser(req, res, next) {
+    new OkResponse({
+      message: "orderByUser success",
+      metadata: await CheckoutService.orderByUser(req.body),
+    }).send(res);
+  }
 }

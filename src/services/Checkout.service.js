@@ -1,5 +1,5 @@
 import { BadRequestError, NotFoundError } from "../core/error.response.js";
-import { CartRepository } from "../models/repositories/cart.repo";
+import { CartRepository } from "../models/repositories/cart.repo.js";
 import ProductRepository from "../models/repositories/product.repo.js";
 import DiscountCodeService from "./DiscountCode.service.js";
 
@@ -40,8 +40,8 @@ class CheckoutService {
       const itemCheckout = {
         shopId,
         shopDiscounts,
-        priceRaw: checkoutOrder, // tiền trước khi giảm giá
-        priceApplyDiscount: checkoutOrder, // tiền sau khi giảm giá
+        priceRaw: checkoutPrice, // tiền trước khi giảm giá
+        priceApplyDiscount: checkoutPrice, // tiền sau khi giảm giá
         itemProducts: validProductServer,
       };
 
@@ -77,6 +77,53 @@ class CheckoutService {
       shopOrderIdsNew,
     };
   }
+
+  async orderByUser({
+    cartId,
+    userId,
+    shopOrderIds,
+    userAddress = {},
+    userPayment = {},
+  }) {
+    //
+    const { checkoutOrder, shopOrderIdsNew } = await this.checkoutReview({
+      cartId,
+      userId,
+      shopOrderIds,
+    });
+
+    // Kiểm tra lại xem có vượt tồn kho hay không
+    const products = shopOrderIds.flatMap((order) => order.itemProducts);
+    console.log("products :::", products);
+  }
 }
 
 export default new CheckoutService();
+
+async function protectedTask() {
+  let lock;
+  try {
+    // lấy lock với TTL = 2000 ms
+    lock = await redlock.acquire(["locks:resource:123"], 2000);
+    console.log("Đã lấy lock");
+
+    // --- critical section ---
+    await doSomethingCritical();
+    // -------------------------
+
+    await lock.release();
+    console.log("Đã release lock");
+  } catch (err) {
+    // Thường ở đây là lỗi không lấy được lock hoặc lỗi trong critical section
+    console.error("Lỗi khi xử lý có lock:", err);
+    // nếu lock tồn tại vẫn cố release trong finally (nếu cần)
+  } finally {
+    if (lock) {
+      try {
+        await lock.release();
+      } catch (e) {
+        /* release có thể fail nếu TTL hết */
+      }
+    }
+  }
+}

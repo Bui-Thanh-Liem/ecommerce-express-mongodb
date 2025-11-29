@@ -5,5 +5,6 @@ import { asyncHandler } from "../../helpers/asyncHandler.js";
 const router = express.Router();
 
 router.post("/review", asyncHandler(CheckoutController.checkoutReview));
+router.post("/order", asyncHandler(CheckoutController.orderByUser));
 
 export default router;
