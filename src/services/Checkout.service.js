@@ -1,7 +1,11 @@
 import { BadRequestError, NotFoundError } from "../core/error.response.js";
+import { redlock } from "../libs/redlock.js";
+import orderModel from "../models/order.model.js";
 import { CartRepository } from "../models/repositories/cart.repo.js";
+import { InventoryRepository } from "../models/repositories/inventory.repo.js";
 import ProductRepository from "../models/repositories/product.repo.js";
 import DiscountCodeService from "./DiscountCode.service.js";
+import inventoryService from "./inventory.service.js";
 
 class CheckoutService {
   async checkoutReview({ cartId, userId, shopOrderIds = [] }) {
@@ -92,38 +96,115 @@ class CheckoutService {
       shopOrderIds,
     });
 
-    // Kiểm tra lại xem có vượt tồn kho hay không
-    const products = shopOrderIds.flatMap((order) => order.itemProducts);
-    console.log("products :::", products);
+    // Xử lý trừ tồn kho với redlock
+    const products = shopOrderIdsNew.flatMap((order) => order.itemProducts);
+    const locks = [];
+    const successful = []; // lưu ds sản phẩm đã trừ tồn
+
+    try {
+      // ===== 1. Acquire lock tất cả sản phẩm =====
+      for (const { productId } of products) {
+        const lock = await redlock.acquire(
+          [`locks:inventory:${productId}`],
+          3000
+        );
+        locks.push(lock);
+      }
+
+      // ===== 2. Critical Section =====
+      for (const { productId, quantity } of products) {
+        const reservation = await inventoryService.reservationInventory({
+          productId,
+          quantity,
+          cartId,
+        });
+
+        if (reservation.modifiedCount <= 0) {
+          throw new BadRequestError(`Sản phẩm ${productId} không đủ tồn`);
+        }
+
+        // Ghi lại để rollback nếu sau đó sản phẩm khác fail
+        successful.push({ productId, quantity });
+      }
+
+      // Tạo đơn hàng ở đây (chưa xóa giỏ hàng)
+      const newOrder = await orderModel.create({
+        userId,
+        checkout: checkoutOrder,
+        shipping: userAddress,
+        payment: userPayment,
+        products,
+      });
+
+      // Xóa giỏ hàng
+      await CartRepository.deleteById(cartId);
+
+      // ===== 3. Thành công =====
+      return {
+        message: "Đặt hàng thành công",
+        success: true,
+      };
+    } catch (err) {
+      console.error("Lỗi trong checkout:", err);
+
+      // ===== 4. ROLLBACK =====
+      for (const { productId, quantity } of successful) {
+        try {
+          await inventoryService.rollbackInventory({
+            productId,
+            quantity,
+            cartId,
+          });
+        } catch (e) {
+          console.error("Rollback fail:", e);
+        }
+      }
+
+      throw new BadRequestError("Không thể đặt hàng, tồn kho không đủ.");
+    } finally {
+      // ===== 5. RELEASE LOCK =====
+      for (const lock of locks) {
+        try {
+          await lock.release();
+        } catch {}
+      }
+    }
+  }
+
+  async getOrderByUser({ userId, orderId }) {
+    const foundOrder = await orderModel.findOne({ _id: orderId, userId });
+    if (!foundOrder) throw new NotFoundError("Order not found");
+    return foundOrder;
+  }
+
+  async getOrdersByUser({ userId, limit = 50, skip = 0 }) {
+    return await orderModel
+      .find({ userId })
+      .sort({ createdAt: -1 })
+      .limit(limit)
+      .skip(skip);
+  }
+
+  async cancelOrderByUser({ userId, orderId }) {
+    const foundOrder = await orderModel.findOne({ _id: orderId, userId });
+    if (!foundOrder) throw new NotFoundError("Order not found");
+    if (foundOrder.status === "cancelled") {
+      throw new BadRequestError("Order already cancelled");
+    }
+
+    // Cập nhật trạng thái hủy đơn
+    foundOrder.status = "cancelled";
+    await foundOrder.save();
+    return foundOrder;
+  }
+
+  async updateOrderStatusBySystem({ orderId, status }) {
+    const foundOrder = await orderModel.findOne({ _id: orderId });
+    if (!foundOrder) throw new NotFoundError("Order not found");
+    foundOrder.status = status;
+    await foundOrder.save();
+    return foundOrder;
   }
 }
 
 export default new CheckoutService();
-
-async function protectedTask() {
-  let lock;
-  try {
-    // lấy lock với TTL = 2000 ms
-    lock = await redlock.acquire(["locks:resource:123"], 2000);
-    console.log("Đã lấy lock");
-
-    // --- critical section ---
-    await doSomethingCritical();
-    // -------------------------
-
-    await lock.release();
-    console.log("Đã release lock");
-  } catch (err) {
-    // Thường ở đây là lỗi không lấy được lock hoặc lỗi trong critical section
-    console.error("Lỗi khi xử lý có lock:", err);
-    // nếu lock tồn tại vẫn cố release trong finally (nếu cần)
-  } finally {
-    if (lock) {
-      try {
-        await lock.release();
-      } catch (e) {
-        /* release có thể fail nếu TTL hết */
-      }
-    }
-  }
-}

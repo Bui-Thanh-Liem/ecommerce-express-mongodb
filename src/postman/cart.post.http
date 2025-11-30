@@ -3,7 +3,7 @@
 ### Create a cart
 POST {{url_dev}}/cart/
 Content-Type: application/json
-x-api-key: 018f3027501094af9877f52528384d50c0dfd2bbc06a8ed02000a9d41a893924
+x-api-key: 7baee00ea02c5b34d0b84a9f5f64cf3bc62c73f49048c37abfff55366f96375e
 
 {
     "userId": "692a64cf3ecec2962c7aba10",
@@ -16,7 +16,7 @@ x-api-key: 018f3027501094af9877f52528384d50c0dfd2bbc06a8ed02000a9d41a893924
 ### Update a cart
 POST {{url_dev}}/cart/update
 Content-Type: application/json
-x-api-key: 018f3027501094af9877f52528384d50c0dfd2bbc06a8ed02000a9d41a893924
+x-api-key: 7baee00ea02c5b34d0b84a9f5f64cf3bc62c73f49048c37abfff55366f96375e
 
 {
     "userId": "692a64cf3ecec2962c7aba10",
@@ -39,7 +39,7 @@ x-api-key: 018f3027501094af9877f52528384d50c0dfd2bbc06a8ed02000a9d41a893924
 ### Delete product item
 DELETE  {{url_dev}}/cart/
 Content-Type: application/json
-x-api-key: 018f3027501094af9877f52528384d50c0dfd2bbc06a8ed02000a9d41a893924
+x-api-key: 7baee00ea02c5b34d0b84a9f5f64cf3bc62c73f49048c37abfff55366f96375e
 
 {
     "userId": "692a64cf3ecec2962c7aba10",
@@ -49,4 +49,4 @@ x-api-key: 018f3027501094af9877f52528384d50c0dfd2bbc06a8ed02000a9d41a893924
 ### Get a cart
 GET {{url_dev}}/cart?userId=692a64cf3ecec2962c7aba10
 Content-Type: application/json
-x-api-key: 018f3027501094af9877f52528384d50c0dfd2bbc06a8ed02000a9d41a893924
+x-api-key: 7baee00ea02c5b34d0b84a9f5f64cf3bc62c73f49048c37abfff55366f96375e
