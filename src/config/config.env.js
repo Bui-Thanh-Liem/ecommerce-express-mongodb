@@ -11,6 +11,11 @@ const development = {
     host: process.env.DEV_REDIS_HOST,
     port: process.env.DEV_REDIS_PORT,
   },
+  discord: {
+    botToken: process.env.DEV_BOT_TOKEN,
+    logChannelId: process.env.DEV_LOG_CHANNEL_ID,
+    urlWebhook: process.env.DEV_URL_WEBHOOK,
+  },
 };
 
 const production = {
@@ -25,6 +30,10 @@ const production = {
   redis: {
     host: process.env.DEV_REDIS_HOST,
     port: process.env.DEV_REDIS_PORT,
+  },
+  discord: {
+    botToken: process.env.PROD_BOT_TOKEN,
+    logChannelId: process.env.PROD_LOG_CHANNEL_ID,
   },
 };
 

@@ -7,7 +7,7 @@ const COLLECTION_NAME = "comments";
 // Declare the Schema of the Mongo model
 var commentSchema = new Schema(
   {
-    productionId: {
+    productId: {
       type: Schema.Types.ObjectId,
       required: true,
       ref: "product",

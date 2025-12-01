@@ -1,0 +1,13 @@
+@url_dev=http://localhost:9000/api/v1
+
+### Create a comment
+POST {{url_dev}}/comment/
+Content-Type: application/json
+x-api-key: 018f3027501094af9877f52528384d50c0dfd2bbc06a8ed02000a9d41a893924
+
+{
+    "productId": "692a64cf3ecec2962c7aba10",
+    "userId": "692aab34a52c29f5545e8e25",
+    "content": "This is a comment"
+}
+

@@ -1,3 +1,4 @@
+import { sendDiscordLog } from "../libs/discord/sendLogFromApp.js";
 import commentModel from "../models/comment.model.js";
 
 class CommentService {
@@ -9,12 +10,12 @@ class CommentService {
    * delete comment [user, shop, admin]
    */
 
-  async addToComment({ productionId, userId, content, parentId = null }) {
+  async addToComment({ productId, userId, content, parentId = null }) {
     const comment = new commentModel({
       userId,
       content,
       parentId,
-      productionId,
+      productId,
     });
 
     // Nested set logic can be added here
@@ -24,7 +25,7 @@ class CommentService {
     } else {
       // Logic for top-level comments
       const maxRightComment = await commentModel
-        .findOne({ productionId, parentId: null })
+        .findOne({ productId, parentId: null })
         .sort("-right")
         .exec();
 
@@ -40,6 +41,10 @@ class CommentService {
     comment.right = rightValue + 1;
 
     await comment.save();
+
+    //
+    sendDiscordLog(comment);
+
     return comment;
   }
 }
