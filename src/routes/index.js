@@ -6,6 +6,7 @@ import routeCart from "./cart/index.js";
 import routeDiscount from "./discount/index.js";
 import routeCheckout from "./checkout/index.js";
 import routeProduct from "./product/index.js";
+import routeComment from "./comment/index.js";
 
 const router = express.Router();
 
@@ -24,5 +25,6 @@ router.use("/product", routeProduct);
 router.use("/discount", routeDiscount);
 router.use("/cart", routeCart);
 router.use("/checkout", routeCheckout);
+router.use("/comment", routeComment);
 
 export default router;
