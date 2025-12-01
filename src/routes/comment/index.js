@@ -6,4 +6,8 @@ const router = express.Router();
 
 router.post("/", asyncHandler(CommentController.addToComment));
 
+router.get("/", asyncHandler(CommentController.getCommentsByParentId));
+
+router.delete("/", asyncHandler(CommentController.deleteCommentById));
+
 export default router;
