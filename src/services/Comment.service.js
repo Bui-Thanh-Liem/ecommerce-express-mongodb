@@ -126,8 +126,7 @@ class CommentService {
     // Xóa comment và các con của nó
     await commentModel.deleteMany({
       productId,
-      left: { $gte: leftValue },
-      right: { $lte: rightValue },
+      left: { $gte: leftValue, $lte: rightValue },
     });
 
     // Cập nhật lại left và right của các comment còn lại
