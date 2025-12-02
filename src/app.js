@@ -4,6 +4,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import "./dbs/init.mongodb.js";
 import { checkOverload, countConnection } from "./helpers/check.connect.js";
+import { DiscordLog } from "./logs/DiscordLog.js";
 import router from "./routes/index.js";
 
 const app = express();
@@ -41,12 +42,22 @@ app.use((err, req, res, next) => {
   const message = err.message || "Internal Server Error";
 
   //
-  return res.status(status).json({
+  const dataRes = {
     message,
     code: status,
     status: "error",
     stack: isDev ? stack : undefined,
-  });
+  };
+
+  // Send log to Discord
+  const clientIp =
+    req.headers["x-forwarded-for"] || req.connection.remoteAddress;
+  const clientId = req.headers["x-client-id"] || "Unknown Client ID";
+  // Lấy thông tin chi tiết người dùng đang thao tác (nếu có)
+  DiscordLog.sendLogError("Error occurred", { ...dataRes, clientIp, clientId });
+
+  //
+  return res.status(status).json(dataRes);
 });
 
 export default app;

@@ -1,4 +1,4 @@
-import { sendDiscordLog } from "../libs/discord/sendLogFromApp.js";
+import { NotFoundError } from "../core/error.response.js";
 import commentModel from "../models/comment.model.js";
 import { ProductModel } from "../models/product.model.js";
 
@@ -27,7 +27,7 @@ class CommentService {
 
       //
       const parentComment = await commentModel.findById(parentId);
-      if (!parentComment) throw new Error("Parent comment not found");
+      if (!parentComment) throw new NotFoundError("Parent comment not found");
 
       // temporary right value
       rightValue = parentComment.right;
@@ -62,10 +62,6 @@ class CommentService {
     comment.right = rightValue + 1;
 
     await comment.save();
-
-    //
-    // sendDiscordLog(comment);
-
     return comment;
   }
 

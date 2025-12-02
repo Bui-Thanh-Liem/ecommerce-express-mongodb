@@ -15,6 +15,8 @@ const development = {
     botToken: process.env.DEV_BOT_TOKEN,
     logChannelId: process.env.DEV_LOG_CHANNEL_ID,
     urlWebhook: process.env.DEV_URL_WEBHOOK,
+    botName: process.env.DEV_BOT_NAME,
+    botAvatar: process.env.DEV_BOT_AVATAR,
   },
 };
 
@@ -34,6 +36,8 @@ const production = {
   discord: {
     botToken: process.env.PROD_BOT_TOKEN,
     logChannelId: process.env.PROD_LOG_CHANNEL_ID,
+    botName: process.env.PROD_BOT_NAME,
+    botAvatar: process.env.PROD_BOT_AVATAR,
   },
 };
 

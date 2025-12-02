@@ -3,22 +3,22 @@
 ### Create a comment
 POST {{url_dev}}/comment/
 Content-Type: application/json
-x-api-key: 4c41f9d65162a0e1ed41843cd57e6d4c7d7fc10a9b74e0d19994d4711a8f3d78
+x-api-key: 1737f2ea5207d7894b8a5ce8709e6e3e1a480f202c4ef9734af19fa6b7099489
 
 {
     "productId": "692a64cf3ecec2962c7aba10",
     "userId": "692aab34a52c29f5545e8e25",
-    "content": "This is a comment 1.1.1",
-    "parentId": "692dad634db252b0298e8413"
+    "content": "This is a comment 1",
+    "parentId": "692a64cf3ecec2962c7aba10"
 }
 
 ### Get comments by parent ID
 GET {{url_dev}}/comment?productId=692a64cf3ecec2962c7aba10&parentId=692dac5da73823a1b70009a3
 Content-Type: application/json
-x-api-key: 4c41f9d65162a0e1ed41843cd57e6d4c7d7fc10a9b74e0d19994d4711a8f3d78
+x-api-key: 1737f2ea5207d7894b8a5ce8709e6e3e1a480f202c4ef9734af19fa6b7099489
 
 ### Delete comment by ID
 DELETE  {{url_dev}}/comment?productId=692a64cf3ecec2962c7aba10&commentId=692dad634db252b0298e8413
 Content-Type: application/json
-x-api-key: 4c41f9d65162a0e1ed41843cd57e6d4c7d7fc10a9b74e0d19994d4711a8f3d78
+x-api-key: 1737f2ea5207d7894b8a5ce8709e6e3e1a480f202c4ef9734af19fa6b7099489
 
